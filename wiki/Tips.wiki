@@ -1,0 +1,9 @@
+#summary OSX Tips
+
+= Introduction =
+
+Tips
+
+=== Subtitles size issue ===
+
+disable ass subtitles and fontconfig option, then pinpoint font location to any valid truetype font (for example: /usr/X11/lib/X11/fonts/TTF/Vera.ttf on OSX)
