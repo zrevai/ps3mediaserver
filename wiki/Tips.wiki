@@ -1,4 +1,4 @@
-#summary OSX Tips
+#summary Tips
 
 = Introduction =
 
