@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== 
+     23 oct. 2008 02:23:08                                                        
+
+     PMS    
+     description
+                   
+     shagrath                                                                
+     ====================================================================== -->
+<project name="PMS" default="PMS" basedir="../">
+    
+	<property name="pms.jar" value="pms.jar" />
+
+	<echo message="IMPORTANT! THIS SCRIPT MUSE USE A JDK 1.5 TO PRODUCE A VALID PMS.JAR FOR OSX"/>
+	<echo message="Java Version: ${java.version}"/>
+	
+	<path id="lib.path.ref">
+		<fileset id="libs.ref" dir="lib" includes="*.jar"/>
+	</path>
+	
+	<target name="clean">
+		<delete dir="osx/dist" quiet="true" />
+		<delete dir="osx/classes" quiet="true" />
+		<delete dir="osx/src" quiet="true" />
+		<delete file="osx/${pms.jar}" />
+	</target>
+	
+    <!-- ================================= 
+          target: PMS              
+         ================================= -->
+    <target name="PMS" depends="depends, clean" description="description">
+		<mkdir dir="osx/classes" />
+    	
+    	<mkdir dir="osx/src" />
+    	<copy todir="osx/src">
+    		<fileset dir="." includes="**/*.java" excludes="osx/**,net/pms/newgui/update/AutoUpdateDialog.java,net/pms/util/PMSUtil.java"/>
+    	</copy>
+    	<copy file="osx/compatibility/PMSUtil.java" tofile="osx/src/net/pms/util/PMSUtil.java"/>
+    	
+    	<!-- Java 1.6 -> 1.5 changes -->
+    	<replace dir="osx/src" token="@Override" value=""/>
+    	<replace dir="osx/src" token="Arrays.copyOf" value="net.pms.util.PMSUtil.copyOf"/>
+		<replace dir="osx/src" token="properties.load(reader);" value="properties.load(new java.io.ByteArrayInputStream(utf.getBytes()));"/>
+    	<replace dir="osx/src" token="AutoUpdateDialog.showIfNecessary(this, autoUpdater);" value=""/>
+    	<replace dir="osx/src" token="import net.pms.newgui.update.AutoUpdateDialog;" value=""/>
+    	<replace dir="osx/src" token="new PipedInputStream((PipedOutputStream) writable, BUFSIZE);" value="new PipedInputStream((PipedOutputStream) writable);"/>
+    	    	
+		<javac srcdir="osx/src" destdir="osx/classes" target="1.5" classpathref="lib.path.ref" debug="on" debuglevel="lines,vars,source" />
+
+	    <jar basedir="osx/classes" destfile="osx/${pms.jar}" compress="off" duplicate="preserve">	
+			<manifest>
+				<attribute name="Main-Class" value="net.pms.PMS" />
+			</manifest>
+	    	
+	    	<zipgroupfileset refid="libs.ref" />
+			
+			<fileset dir="net" includes="**/*.class" excludes="**/*.java" />
+			<fileset dir="." includes="resources/**,net/pms/*.properties" />
+		</jar>
+		
+    	<delete dir="osx/classes" quiet="true" />
+    	<delete dir="osx/src" quiet="true" />
+    	
+    </target>
+	
+
+
+    <!-- - - - - - - - - - - - - - - - - - 
+          target: depends                      
+         - - - - - - - - - - - - - - - - - -->
+    <target name="depends">
+    	<property name="version" value="1.02.1" />
+    </target>
+
+</project>
