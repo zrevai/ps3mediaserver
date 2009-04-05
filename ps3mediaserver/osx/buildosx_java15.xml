@@ -22,6 +22,7 @@
 		<delete dir="osx/dist" quiet="true" />
 		<delete dir="osx/classes" quiet="true" />
 		<delete dir="osx/src" quiet="true" />
+		<delete dir="${bundle}" quiet="true" />
 		<delete file="osx/${pms.jar}" />
 	</target>
 	
@@ -63,7 +64,71 @@
     	
     </target>
 	
+    <property name="osx" value="osx"/>
+    <property name="bundle" value="${osx}/PS3 Media Server.app"/>
+    <!-- Requires the JarBundler ant task, which can be downloaded here http://jarbundler.sourceforge.net/
+         To enable the task, copy jarbundler-2.1.0.jar to /usr/share/ant/lib. -->
+    <target name="MacBundle" depends="PMS">
+	<taskdef name="jarbundler" classname="net.sourceforge.jarbundler.JarBundler"/>
+        <property name="bundleResources" value="${bundle}/Contents/Resources"/>
+        <property name="javaResources" value="${bundleResources}/Java"/>
+        <property name="osxResources" value="${javaResources}/osx"/>
+        <jarbundler jar="${osx}/PMS.jar" dir="${osx}" name="PS3 Media Server" mainclass="net.pms.PMS" jvmversion="1.5+" icon="${osx}/pms.icns" version="${version}"
+	     vmoptions="-Xmx768M -Djava.encoding=UTF-8 -Djava.net.preferIPv4Stack=true -jar" workingdirectory="$APP_PACKAGE/Contents/Resources/Java"/>
+        <copy file="CHANGELOG" todir="${javaResources}"/>
+        <copy file="LICENSE.txt" todir="${javaResources}"/>
+        <copy file="PMS.conf" todir="${javaResources}"/>
+        <copy file="FAQ" todir="${javaResources}"/>
+        <copy file="README" todir="${javaResources}"/>
+        <copy file="WEB.conf" todir="${javaResources}"/>
+        <mkdir dir="${javaResources}/renderers"/>
+	<copy todir="${javaResources}/renderers">
+    		<fileset dir="renderers"/>
+	</copy>
+        <mkdir dir="${osxResources}"/>
+        <exec executable="ditto">
+             <arg value="${osx}/ffmpeg"/>
+             <arg value="${osx}/dcrawU"/>
+             <arg value="${osx}/mencoder"/>
+             <arg value="${osx}/mencoder_mt"/>
+             <arg value="${osx}/mplayer"/>
+             <arg value="${osx}/flac"/>
+             <arg value="${osx}/tsMuxeR"/>
+             <arg value="${osxResources}"/>
+        </exec>
+        <chmod perm="a+x" type="file">
+             <fileset dir="${osxResources}">
+                  <include name="*"/>
+             </fileset>
+        </chmod>
+    </target>
 
+    <target name="DMG" depends="MacBundle">
+        <property name="dmgFolder" value="${osx}/PS3 Media Server"/>
+        <mkdir dir="${dmgFolder}"/>
+        <exec executable="ditto">
+             <arg value="${bundle}"/>
+             <arg value="${dmgFolder}/PS3 Media Server.app"/>
+        </exec>
+        <exec executable="osascript">
+            <arg value="-e"/>
+            <arg value="tell application &quot;Finder&quot; to make new alias to folder &quot;Applications&quot; of startup disk"/>
+        </exec>
+        <exec executable="mv">
+             <arg value="${user.home}/Desktop/Applications"/>
+             <arg value="${basedir}/${dmgFolder}"/>
+        </exec>
+        <exec executable="hdiutil">
+             <arg value="create"/>
+             <arg value="-megabytes"/>
+             <arg value="80"/>
+             <arg value="-srcfolder"/>
+             <arg value="${dmgFolder}"/>
+             <arg value="-format"/>
+             <arg value="UDBZ"/>
+             <arg value="${osx}/pms-macosx-${version}.dmg"/>
+        </exec>
+    </target>
 
     <!-- - - - - - - - - - - - - - - - - - 
           target: depends                      
