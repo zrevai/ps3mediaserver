@@ -22,8 +22,10 @@
 		<delete dir="osx/dist" quiet="true" />
 		<delete dir="osx/classes" quiet="true" />
 		<delete dir="osx/src" quiet="true" />
-		<delete dir="${bundle}" quiet="true" />
+		<delete dir="osx/PS3 Media Server.app" quiet="true" />
+		<delete dir="osx/PS3 Media Server" quiet="true" />
 		<delete file="osx/${pms.jar}" />
+		<delete file="osx/pms-macosx-${version}.dmg" />
 	</target>
 	
     <!-- ================================= 
@@ -78,6 +80,10 @@
         <copy file="CHANGELOG" todir="${javaResources}"/>
         <copy file="LICENSE.txt" todir="${javaResources}"/>
         <copy file="PMS.conf" todir="${javaResources}"/>
+	<replaceregexp file="${javaResources}/PMS.conf"
+                         match="mencoder_ass = true"
+                         replace="mencoder_ass = false"
+                         byline="true"/>
         <copy file="FAQ" todir="${javaResources}"/>
         <copy file="README" todir="${javaResources}"/>
         <copy file="WEB.conf" todir="${javaResources}"/>
