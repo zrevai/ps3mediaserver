@@ -12,22 +12,42 @@ import net.pms.newgui.LooksFrame;
 import net.pms.PMS;
 import net.pms.io.OutputTextConsumer;
 
+import com.apple.eawt.*;
+
 public class PMSUtil {
+
+    private static LooksFrame frameRef;
 	
-	@SuppressWarnings("unchecked")
-	public static <T> T[] copyOf(T[] original, int newLength) {
-		Class newType = original.getClass();
-		 T[] copy = ((Object)newType == (Object)Object[].class)
-         ? (T[]) new Object[newLength]
-         : (T[]) Array.newInstance(newType.getComponentType(), newLength);
-     System.arraycopy(original, 0, copy, 0,
-                      Math.min(original.length, newLength));
-     return copy;
-	}
+    @SuppressWarnings("unchecked")
+    public static <T> T[] copyOf(T[] original, int newLength) {
+        Class newType = original.getClass();
+	T[] copy = ((Object)newType == (Object)Object[].class)
+        ? (T[]) new Object[newLength]
+        : (T[]) Array.newInstance(newType.getComponentType(), newLength);
+        System.arraycopy(original, 0, copy, 0,
+        Math.min(original.length, newLength));
+        return copy;
+    }
 	
-	public static boolean isNetworkInterfaceLoopback(NetworkInterface ni) throws SocketException {
-		return false;
-	}
+    public static boolean isNetworkInterfaceLoopback(NetworkInterface ni) throws SocketException {
+        return false;
+    }
+
+
+    public static void addSystemTray(final LooksFrame frame) {
+        frameRef = frame;
+	Application.getApplication().addApplicationListener(new com.apple.eawt.ApplicationAdapter() {
+														
+  	    public void handleReOpenApplication(ApplicationEvent e) {
+	        if(!frameRef.isVisible()) frameRef.setVisible(true);
+	    }
+															
+	    public void handleQuit(ApplicationEvent e) {
+	        System.exit(0);
+	    }
+															
+	});
+    }
 
     /**
      * On Mac OS, open the given URI with the "open" command.  This will open HTTP URLs in the default browser.
@@ -41,10 +61,6 @@ public class PMSUtil {
             PMS.error("Unable to open the given URI: " + uri, e);
         }
     }
-
-	public static void addSystemTray(final LooksFrame frame) {
-		
-	}
 
     /**
      * On Mac OS, fetch the hardware address from the command line tool "ifconfig".
@@ -85,6 +101,6 @@ public class PMSUtil {
             PMS.error("Interrupted while waiting for ifconfig", e);
         }
         return aHardwareAddress;
-    }
+     }
 
 }
