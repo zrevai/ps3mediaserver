@@ -140,7 +140,7 @@
           target: depends                      
          - - - - - - - - - - - - - - - - - -->
     <target name="depends">
-    	<property name="version" value="1.11" />
+    	<property name="version" value="1.20" />
     </target>
 
 </project>
