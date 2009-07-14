@@ -87,6 +87,10 @@
         <copy file="FAQ" todir="${javaResources}"/>
         <copy file="README" todir="${javaResources}"/>
         <copy file="WEB.conf" todir="${javaResources}"/>
+        <mkdir dir="${javaResources}/plugins"/>
+	<copy todir="${javaResources}/plugins">
+    		<fileset dir="plugins"/>
+	</copy>
         <mkdir dir="${javaResources}/renderers"/>
 	<copy todir="${javaResources}/renderers">
     		<fileset dir="renderers"/>
