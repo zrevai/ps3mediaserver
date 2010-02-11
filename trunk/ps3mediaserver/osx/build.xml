@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="PMS" default="PMS" basedir="../">
+	<property name="version" value="1.20" />
 	<property name="pms.jar" value="pms.jar" />
 
 	<echo message="IMPORTANT! THIS SCRIPT MUST USE MAC OS X 10.5 OR HIGHER AND JDK 1.6 TO PRODUCE A VALID PMS.JAR"/>
@@ -21,9 +22,9 @@
 	
     	<!-- ================================= 
              Target: PMS
-	     Description: Creates a PMS.jar for OS X
+	     Description: Creates a PMS.jar for Mac OS X.
              ================================= -->
-    	<target name="PMS" depends="depends, clean">
+    	<target name="PMS" depends="clean">
 		<mkdir dir="osx/classes" />
     		<mkdir dir="osx/src" />
 
@@ -52,9 +53,9 @@
     
     	<!-- ================================= 
 	     Target: MacBundle
-	     Description: Creates a Mac OS X .app bundle
+	     Description: Creates a Mac OS X .app bundle.
 
-	     Requires the JarBundler (2.1.) ant task, which can be downloaded at http://informagen.com/JarBundler/
+	     Requires the JarBundler (2.1.0) ant task, which can be downloaded at http://informagen.com/JarBundler/
 	     To enable the task, copy jarbundler-2.1.0.jar to /usr/share/ant/lib/
              ================================= -->
 	<target name="MacBundle" depends="PMS">
@@ -100,7 +101,7 @@
 
     	<!-- ================================= 
 	     Target: DMG
-	     Description: Creates a Mac OS X DMG bundle from the .app bundle, used for official releases
+	     Description: Creates a Mac OS X DMG bundle from the .app bundle, uses tools only available on Mac OS X. Used for official releases.
              ================================= -->
 	<target name="DMG" depends="MacBundle">
         	<property name="dmgFolder" value="${osx}/PS3 Media Server"/>
@@ -127,9 +128,5 @@
              		<arg value="UDBZ"/>
              		<arg value="${osx}/pms-macosx-${version}.dmg"/>
         	</exec>
-	</target>
-
-	<target name="depends">
-		<property name="version" value="1.20" />
 	</target>
 </project>
