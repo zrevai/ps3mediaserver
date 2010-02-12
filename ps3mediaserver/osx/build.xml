@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="PMS" default="PMS" basedir="../">
-	<property name="version" value="1.20" />
+	<property name="version" value="1.20.393" />
 	<property name="pms.jar" value="pms.jar" />
 
 	<echo message="IMPORTANT! THIS SCRIPT MUST USE MAC OS X 10.5 OR HIGHER AND JDK 1.6 TO PRODUCE A VALID PMS.JAR"/>
@@ -77,7 +77,7 @@
 		<copy todir="${javaResources}/plugins">
     			<fileset dir="plugins"/>
 		</copy>
-		<copy file="libmediainfo.dylib" todir="${javaResources}"/>
+		<copy file="${osx}/libmediainfo.dylib" todir="${javaResources}"/>
         	<mkdir dir="${javaResources}/renderers"/>
 		<copy todir="${javaResources}/renderers">
     			<fileset dir="renderers"/>
