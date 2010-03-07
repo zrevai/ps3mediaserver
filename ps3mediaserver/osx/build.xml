@@ -64,7 +64,7 @@
         	<property name="javaResources" value="${bundleResources}/Java"/>
         	<property name="osxResources" value="${javaResources}/osx"/>
         	
-		<jarbundler jar="${osx}/${pms.jar}" dir="${osx}" name="PS3 Media Server" signature="PS3M" mainclass="net.pms.PMS" jvmversion="1.6+" icon="${osx}/pms.icns" version="${version}" vmoptions="-Xmx768M -Dfile.encoding=UTF-8 -Djava.net.preferIPv4Stack=true -jar" workingdirectory="$APP_PACKAGE/Contents/Resources/Java"/>
+		<jarbundler jar="${osx}/${pms.jar}" dir="${osx}" name="PS3 Media Server" signature="PS3M" mainclass="net.pms.PMS" jvmversion="1.6+" icon="${osx}/pms.icns" version="${version}" vmoptions="-Xmx768M -Xss16M -Dfile.encoding=UTF-8 -Djava.net.preferIPv4Stack=true -jar" workingdirectory="$APP_PACKAGE/Contents/Resources/Java"/>
 
 		<replaceregexp file="${bundle}/Contents/Info.plist" match="JavaApplicationStub" replace="JavaApplicationStub.setenv" byline="false"/>
 		<copy file="${osx}/JavaApplicationStub.setenv" todir="${bundle}/Contents/MacOS"/>
