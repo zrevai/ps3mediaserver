@@ -1,0 +1,9 @@
+http://oss.netfarm.it/mplayer-win32.php
+
+FFmpeg svn rev 22628 - 03/22/2010
+MPlayer, MEncoder, and MEncoder MT svn rev 30369 - 01/19/2010
+
+
+http://www.smlabs.net/tsmuxer_en.html
+
+TsMuxer.exe version 1.10.6
