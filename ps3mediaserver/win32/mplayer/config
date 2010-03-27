@@ -26,5 +26,5 @@ msgcolor=yes
 #vf=eq,pp=lb/hb/vb
 
 ## Fontconfig
-fontconfig=yes
-font=Arial
+#fontconfig=yes
+#font=Arial
