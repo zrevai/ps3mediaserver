@@ -36,7 +36,6 @@
 !ifdef MUI_COMPONENTSPAGE
   ${LangFileString} MUI_TEXT_COMPONENTS_TITLE "בחר רכיבים"
   ${LangFileString} MUI_TEXT_COMPONENTS_SUBTITLE "בחר אילו רכיבים של $(^NameDA) ברצונך להתקין."
-  ${LangFileString} MUI_INNERTEXT_COMPONENTS_DESCRIPTION_TITLE "תיאור"
 !endif
 
 !ifdef MUI_UNCOMPONENTSPAGE
@@ -45,6 +44,7 @@
 !endif
 
 !ifdef MUI_COMPONENTSPAGE | MUI_UNCOMPONENTSPAGE
+  ${LangFileString} MUI_INNERTEXT_COMPONENTS_DESCRIPTION_TITLE "תיאור"
   !ifndef NSIS_CONFIG_COMPONENTPAGE_ALTERNATIVE
     ${LangFileString} MUI_INNERTEXT_COMPONENTS_DESCRIPTION_INFO "העבר את העכבר מעל רכיב כלשהו בכדי לצפות בתיאורו."
   !else
@@ -57,7 +57,7 @@
   ${LangFileString} MUI_TEXT_DIRECTORY_SUBTITLE "בחר את התיקייה בה אתה מעוניין להתקין את $(^NameDA)."
 !endif
 
-!ifdef MUI_UNDIRECTORYSPAGE
+!ifdef MUI_UNDIRECTORYPAGE
   ${LangFileString} MUI_UNTEXT_DIRECTORY_TITLE "בחר מיקום להסרה"
   ${LangFileString} MUI_UNTEXT_DIRECTORY_SUBTITLE "בחר את התיקייה ממנה אתה מעוניין להסיר את $(^NameDA)."
 !endif
