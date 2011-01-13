@@ -36,7 +36,6 @@
 !ifdef MUI_COMPONENTSPAGE
   ${LangFileString} MUI_TEXT_COMPONENTS_TITLE "O'rnatilayotgan dastur komponentlari"
   ${LangFileString} MUI_TEXT_COMPONENTS_SUBTITLE "$(^NameDA) dasturning o'zingizga kerak bo'lgan komponentasini tanlang."
-  ${LangFileString} MUI_INNERTEXT_COMPONENTS_DESCRIPTION_TITLE "Tasvir"
 !endif
 
 !ifdef MUI_UNCOMPONENTSPAGE
@@ -45,6 +44,7 @@
 !endif
 
 !ifdef MUI_COMPONENTSPAGE | MUI_UNCOMPONENTSPAGE
+  ${LangFileString} MUI_INNERTEXT_COMPONENTS_DESCRIPTION_TITLE "Tasvir"
   !ifndef NSIS_CONFIG_COMPONENTPAGE_ALTERNATIVE
     ${LangFileString} MUI_INNERTEXT_COMPONENTS_DESCRIPTION_INFO "Sichqonchaning kursorini komponent tasvirini o'qish uchun ustiga quying."
   !else
@@ -57,7 +57,7 @@
   ${LangFileString} MUI_TEXT_DIRECTORY_SUBTITLE "$(^NameDA)ni o'rnatish uchun papka tanlang."
 !endif
 
-!ifdef MUI_UNDIRECTORYSPAGE
+!ifdef MUI_UNDIRECTORYPAGE
   ${LangFileString} MUI_UNTEXT_DIRECTORY_TITLE "O'chiriladigan papkani tanlash"
   ${LangFileString} MUI_UNTEXT_DIRECTORY_SUBTITLE "$(^NameDA) o'chiriladigan papkasini ko'rsating."
 !endif

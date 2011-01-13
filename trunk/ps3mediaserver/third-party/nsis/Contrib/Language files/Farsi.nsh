@@ -36,7 +36,6 @@
 !ifdef MUI_COMPONENTSPAGE
   ${LangFileString} MUI_TEXT_COMPONENTS_TITLE "«д ќ«» «ћ“«н »—д«ге "
   ${LangFileString} MUI_TEXT_COMPONENTS_SUBTITLE "«ћ“«нн «“  $(^NameDA) яе гнќж«енѕ д’» ‘ждѕ —« «д ќ«» яднѕ."
-  ${LangFileString} MUI_INNERTEXT_COMPONENTS_DESCRIPTION_TITLE " ж÷нЌ« "
 !endif
 
 !ifdef MUI_UNCOMPONENTSPAGE
@@ -45,6 +44,7 @@
 !endif
 
 !ifdef MUI_COMPONENTSPAGE | MUI_UNCOMPONENTSPAGE
+  ${LangFileString} MUI_INNERTEXT_COMPONENTS_DESCRIPTION_TITLE " ж÷нЌ« "
   !ifndef NSIS_CONFIG_COMPONENTPAGE_ALTERNATIVE
     ${LangFileString} MUI_INNERTEXT_COMPONENTS_DESCRIPTION_INFO "д‘«дР— г«ж” —« »— —жн  «ћ“«нн яе гнќж«енѕ »»—нѕ  «  ж÷нЌ«  ¬д —« »»нднѕ."
   !else
@@ -57,7 +57,7 @@
   ${LangFileString} MUI_TEXT_DIRECTORY_SUBTITLE "Бж‘е «н яе гнќж«енѕ  $(^NameDA) ѕ— ¬д д’» ‘жѕ —« «д ќ«» яднѕ."
 !endif
 
-!ifdef MUI_UNDIRECTORYSPAGE
+!ifdef MUI_UNDIRECTORYPAGE
   ${LangFileString} MUI_UNTEXT_DIRECTORY_TITLE "Бж‘е Ќ–Ё —« «д ќ«» яднѕ"
   ${LangFileString} MUI_UNTEXT_DIRECTORY_SUBTITLE "Бж‘е «н яе гнќж«енѕ $(^NameDA) —« «“ ¬д Ќ–Ё яднѕ «д ќ«» яднѕ."
 !endif

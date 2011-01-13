@@ -36,7 +36,6 @@
 !ifdef MUI_COMPONENTSPAGE
   ${LangFileString} MUI_TEXT_COMPONENTS_TITLE "Roghnaigh Comhpháirteanna"
   ${LangFileString} MUI_TEXT_COMPONENTS_SUBTITLE "Roghnaigh na gnéithe $(^NameDA) ba mhaith leat suiteáil."
-  ${LangFileString} MUI_INNERTEXT_COMPONENTS_DESCRIPTION_TITLE "Cur Síos"
 !endif
 
 !ifdef MUI_UNCOMPONENTSPAGE
@@ -45,6 +44,7 @@
 !endif
 
 !ifdef MUI_COMPONENTSPAGE | MUI_UNCOMPONENTSPAGE
+  ${LangFileString} MUI_INNERTEXT_COMPONENTS_DESCRIPTION_TITLE "Cur Síos"
   !ifndef NSIS_CONFIG_COMPONENTPAGE_ALTERNATIVE
     ${LangFileString} MUI_INNERTEXT_COMPONENTS_DESCRIPTION_INFO "Cuir do luch os cionn comhpháirte chun cur síos a fheiceáil."
   !else
@@ -57,7 +57,7 @@
   ${LangFileString} MUI_TEXT_DIRECTORY_SUBTITLE "Roghnaigh an fillteán inar mian leat $(^NameDA) a shuiteáil."
 !endif
 
-!ifdef MUI_UNDIRECTORYSPAGE
+!ifdef MUI_UNDIRECTORYPAGE
   ${LangFileString} MUI_UNTEXT_DIRECTORY_TITLE "Roghnaigh Suíomh na Díshuiteála"
   ${LangFileString} MUI_UNTEXT_DIRECTORY_SUBTITLE "Roghnaigh an fillteán ar mian leat $(^NameDA) a dhíshuiteáil as."
 !endif

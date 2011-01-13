@@ -36,7 +36,6 @@
 !ifdef MUI_COMPONENTSPAGE
   ${LangFileString} MUI_TEXT_COMPONENTS_TITLE "Onderdelen kiezen"
   ${LangFileString} MUI_TEXT_COMPONENTS_SUBTITLE "Kies de onderdelen die u wilt installeren."
-  ${LangFileString} MUI_INNERTEXT_COMPONENTS_DESCRIPTION_TITLE "Beschrijving"
 !endif
 
 !ifdef MUI_UNCOMPONENTSPAGE
@@ -45,6 +44,7 @@
 !endif
 
 !ifdef MUI_COMPONENTSPAGE | MUI_UNCOMPONENTSPAGE
+  ${LangFileString} MUI_INNERTEXT_COMPONENTS_DESCRIPTION_TITLE "Beschrijving"
   !ifndef NSIS_CONFIG_COMPONENTPAGE_ALTERNATIVE
     ${LangFileString} MUI_INNERTEXT_COMPONENTS_DESCRIPTION_INFO "Beweeg uw muis over een onderdeel om de beschrijving te zien."
   !else
@@ -57,7 +57,7 @@
   ${LangFileString} MUI_TEXT_DIRECTORY_SUBTITLE "Kies de map waarin u $(^NameDA) wilt installeren."
 !endif
 
-!ifdef MUI_UNDIRECTORYSPAGE
+!ifdef MUI_UNDIRECTORYPAGE
   ${LangFileString} MUI_UNTEXT_DIRECTORY_TITLE "Locatie kiezen"
   ${LangFileString} MUI_UNTEXT_DIRECTORY_SUBTITLE "Kies de map waaruit u $(^NameDA) wilt verwijderen."
 !endif

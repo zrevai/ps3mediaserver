@@ -36,7 +36,6 @@
 !ifdef MUI_COMPONENTSPAGE
   ${LangFileString} MUI_TEXT_COMPONENTS_TITLE "Escolher Componentes"
   ${LangFileString} MUI_TEXT_COMPONENTS_SUBTITLE "Escolha quais funções do $(^NameDA) você quer instalar."
-  ${LangFileString} MUI_INNERTEXT_COMPONENTS_DESCRIPTION_TITLE "Descrição"
 !endif
 
 !ifdef MUI_UNCOMPONENTSPAGE
@@ -45,6 +44,7 @@
 !endif
 
 !ifdef MUI_COMPONENTSPAGE | MUI_UNCOMPONENTSPAGE
+  ${LangFileString} MUI_INNERTEXT_COMPONENTS_DESCRIPTION_TITLE "Descrição"
   !ifndef NSIS_CONFIG_COMPONENTPAGE_ALTERNATIVE
     ${LangFileString} MUI_INNERTEXT_COMPONENTS_DESCRIPTION_INFO "Posicione seu mouse sobre um componente para ver sua descrição."
   !else
@@ -57,7 +57,7 @@
   ${LangFileString} MUI_TEXT_DIRECTORY_SUBTITLE "Escolha a pasta na qual instalar o $(^NameDA)."
 !endif
 
-!ifdef MUI_UNDIRECTORYSPAGE
+!ifdef MUI_UNDIRECTORYPAGE
   ${LangFileString} MUI_UNTEXT_DIRECTORY_TITLE "Escolher o Local da Desinstalação"
   ${LangFileString} MUI_UNTEXT_DIRECTORY_SUBTITLE "Escolha a pasta da qual desinstalar o $(^NameDA)."
 !endif
@@ -94,7 +94,7 @@
 
 !ifdef MUI_FINISHPAGE | MUI_UNFINISHPAGE
   ${LangFileString} MUI_TEXT_FINISH_REBOOTNOW "Reiniciar agora"
-  ${LangFileString} MUI_TEXT_FINISH_REBOOTLATER "Eu quer reiniciar manualmente depois"
+  ${LangFileString} MUI_TEXT_FINISH_REBOOTLATER "Eu quero reiniciar manualmente depois"
   ${LangFileString} MUI_TEXT_FINISH_RUN "&Executar $(^NameDA)"
   ${LangFileString} MUI_TEXT_FINISH_SHOWREADME "&Mostrar o Readme"
   ${LangFileString} MUI_BUTTONTEXT_FINISH "&Terminar"
@@ -113,11 +113,11 @@
 !endif
 
 !ifdef MUI_ABORTWARNING
-  ${LangFileString} MUI_TEXT_ABORTWARNING "Você tem certeza que você quer sair do Instalador do $(^Name)?"
+  ${LangFileString} MUI_TEXT_ABORTWARNING "Você tem certeza de que quer sair do Instalador do $(^Name)?"
 !endif
 
 !ifdef MUI_UNABORTWARNING
-  ${LangFileString} MUI_UNTEXT_ABORTWARNING "Você tem certeza que você quer sair da Desinstalação do $(^Name)?"
+  ${LangFileString} MUI_UNTEXT_ABORTWARNING "Você tem certeza de que quer sair da Desinstalação do $(^Name)?"
 !endif
 
 !ifdef MULTIUSER_INSTALLMODEPAGE

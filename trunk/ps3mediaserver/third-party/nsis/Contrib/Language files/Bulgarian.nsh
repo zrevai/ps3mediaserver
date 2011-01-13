@@ -27,7 +27,7 @@
 !ifdef MUI_UNLICENSEPAGE
   ${LangFileString} MUI_UNTEXT_LICENSE_TITLE "Лицензионно споразумение"
   ${LangFileString} MUI_UNTEXT_LICENSE_SUBTITLE "Моля запознайте се лицензионните условия преди да изтриете $(^NameDA)."
-  ${LangFileString} MUI_UNINNERTEXT_LICENSE_BOTTOM "Ако приемате условията на споразуменито, натиснете $\"Съгласен$\" за да продължите. Трябва да приемете споразумението, за да изтриете $(^NameDA)." $_CLICK"
+  ${LangFileString} MUI_UNINNERTEXT_LICENSE_BOTTOM "Ако приемате условията на споразуменито, натиснете $\"Съгласен$\" за да продължите. Трябва да приемете споразумението, за да изтриете $(^NameDA). $_CLICK"
   ${LangFileString} MUI_UNINNERTEXT_LICENSE_BOTTOM_CHECKBOX "Ако приемате условията на споразумението, сложете отметка в полето по-долу. Трябва да приемете споразумението, за да изтриете $(^NameDA). $_CLICK"
   ${LangFileString} MUI_UNINNERTEXT_LICENSE_BOTTOM_RADIOBUTTONS "Ако приемате условията на споразуменито, изберете първата опция по-долу. Трябва да приемете споразумението, за да изтриете $(^NameDA). $_CLICK"
 !endif
@@ -39,7 +39,6 @@
 !ifdef MUI_COMPONENTSPAGE
   ${LangFileString} MUI_TEXT_COMPONENTS_TITLE "Избор на компоненти"
   ${LangFileString} MUI_TEXT_COMPONENTS_SUBTITLE "Изберете кои компоненти на $(^NameDA) искате да инсталирате."
-  ${LangFileString} MUI_INNERTEXT_COMPONENTS_DESCRIPTION_TITLE "Описание"
 !endif
 
 !ifdef MUI_UNCOMPONENTSPAGE
@@ -48,6 +47,7 @@
 !endif
 
 !ifdef MUI_COMPONENTSPAGE | MUI_UNCOMPONENTSPAGE
+  ${LangFileString} MUI_INNERTEXT_COMPONENTS_DESCRIPTION_TITLE "Описание"
   !ifndef NSIS_CONFIG_COMPONENTPAGE_ALTERNATIVE
     ${LangFileString} MUI_INNERTEXT_COMPONENTS_DESCRIPTION_INFO "Преминете с мишката над определен компонент, за да видите описанието му."
   !else
@@ -60,7 +60,7 @@
   ${LangFileString} MUI_TEXT_DIRECTORY_SUBTITLE "Изберете папката, в която да се инсталира $(^NameDA)."
 !endif
 
-!ifdef MUI_UNDIRECTORYSPAGE
+!ifdef MUI_UNDIRECTORYPAGE
   ${LangFileString} MUI_UNTEXT_DIRECTORY_TITLE "Избор на папка за изтриване"
   ${LangFileString} MUI_UNTEXT_DIRECTORY_SUBTITLE "Изберете папката, от която да се изтрие $(^NameDA)."
 !endif

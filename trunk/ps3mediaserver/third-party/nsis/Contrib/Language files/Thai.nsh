@@ -36,7 +36,6 @@
 !ifdef MUI_COMPONENTSPAGE
   ${LangFileString} MUI_TEXT_COMPONENTS_TITLE "เลือกส่วนประกอบ"
   ${LangFileString} MUI_TEXT_COMPONENTS_SUBTITLE "เลือกสิ่งที่คุณต้องการใช้งานจาก $(^NameDA) ที่คุณต้องการติดตั้ง"
-  ${LangFileString} MUI_INNERTEXT_COMPONENTS_DESCRIPTION_TITLE "รายละเอียด"
 !endif
 
 !ifdef MUI_UNCOMPONENTSPAGE
@@ -45,6 +44,7 @@
 !endif
 
 !ifdef MUI_COMPONENTSPAGE | MUI_UNCOMPONENTSPAGE
+  ${LangFileString} MUI_INNERTEXT_COMPONENTS_DESCRIPTION_TITLE "รายละเอียด"
   !ifndef NSIS_CONFIG_COMPONENTPAGE_ALTERNATIVE
     ${LangFileString} MUI_INNERTEXT_COMPONENTS_DESCRIPTION_INFO "ขยับเมาส์ของคุณเหนือส่วนประกอบเพื่อดูรายละเอียด"
   !else
@@ -57,7 +57,7 @@
   ${LangFileString} MUI_TEXT_DIRECTORY_SUBTITLE "เลือกแผ้มที่ต้องการติดตั้ง $(^NameDA)."
 !endif
 
-!ifdef MUI_UNDIRECTORYSPAGE
+!ifdef MUI_UNDIRECTORYPAGE
   ${LangFileString} MUI_UNTEXT_DIRECTORY_TITLE "เลือกแฟ้มที่ต้องการยกเลิกการติดตั้ง"
   ${LangFileString} MUI_UNTEXT_DIRECTORY_SUBTITLE "เลือกแฟ้มที่คุณต้องการยกเลิกการติดตั้งของ $(^NameDA)."
 !endif

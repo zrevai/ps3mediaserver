@@ -7,7 +7,7 @@
 
 !ifdef MUI_WELCOMEPAGE
   ${LangFileString} MUI_TEXT_WELCOME_INFO_TITLE "Benvenuti nel programma di installazione di $(^NameDA)"
-  ${LangFileString} MUI_TEXT_WELCOME_INFO_TEXT "Questo programma installerà $(^NameDA) nel vostro computer.$\r$\n$\r$\nSi raccomanda di chiudere tutte le altre applicazioni prima di iniziare l'installazione. Questo permetterà al programma di installazione di aggiornare i file di  sistema senza dover riavviare il computer.$\r$\n$\r$\n$_CLICK"
+  ${LangFileString} MUI_TEXT_WELCOME_INFO_TEXT "Questo programma installerà $(^NameDA) nel vostro computer.$\r$\n$\r$\nSi raccomanda di chiudere tutte le altre applicazioni prima di iniziare l'installazione. Questo permetterà al programma di installazione di aggiornare i file di sistema senza dover riavviare il computer.$\r$\n$\r$\n$_CLICK"
 !endif
 
 !ifdef MUI_UNWELCOMEPAGE
@@ -38,7 +38,6 @@
 !ifdef MUI_COMPONENTSPAGE
   ${LangFileString} MUI_TEXT_COMPONENTS_TITLE "Selezione dei componenti"
   ${LangFileString} MUI_TEXT_COMPONENTS_SUBTITLE "Selezionare i componenti di $(^NameDA) che si desidera installare."
-  ${LangFileString} MUI_INNERTEXT_COMPONENTS_DESCRIPTION_TITLE "Descrizione"
 !endif
 
 !ifdef MUI_UNCOMPONENTSPAGE
@@ -47,6 +46,7 @@
 !endif
 
 !ifdef MUI_COMPONENTSPAGE | MUI_UNCOMPONENTSPAGE
+  ${LangFileString} MUI_INNERTEXT_COMPONENTS_DESCRIPTION_TITLE "Descrizione"
   !ifndef NSIS_CONFIG_COMPONENTPAGE_ALTERNATIVE
     ${LangFileString} MUI_INNERTEXT_COMPONENTS_DESCRIPTION_INFO "Posizionare il puntatore del mouse sul componente per vederne la descrizione."
   !else
@@ -59,14 +59,14 @@
   ${LangFileString} MUI_TEXT_DIRECTORY_SUBTITLE "Scegliere la cartella nella quale installare $(^NameDA)."
 !endif
 
-!ifdef MUI_UNDIRECTORYSPAGE
+!ifdef MUI_UNDIRECTORYPAGE
   ${LangFileString} MUI_UNTEXT_DIRECTORY_TITLE "Scelta della cartella da cui disinstallare"
   ${LangFileString} MUI_UNTEXT_DIRECTORY_SUBTITLE "Scegliere la cartella dalla quale disinstallare $(^NameDA)."
 !endif
 
 !ifdef MUI_INSTFILESPAGE
   ${LangFileString} MUI_TEXT_INSTALLING_TITLE "Installazione in corso"
-  ${LangFileString} MUI_TEXT_INSTALLING_SUBTITLE "Prego attendere mentre $(^NameDA)  viene installato."
+  ${LangFileString} MUI_TEXT_INSTALLING_SUBTITLE "Prego attendere mentre $(^NameDA) viene installato."
   ${LangFileString} MUI_TEXT_FINISH_TITLE "Installazione completata"
   ${LangFileString} MUI_TEXT_FINISH_SUBTITLE "L'installazione è stata completata con successo."
   ${LangFileString} MUI_TEXT_ABORT_TITLE "Installazione interrotta"
@@ -99,7 +99,7 @@
   ${LangFileString} MUI_TEXT_FINISH_REBOOTLATER "Preferisco riavviarlo manualmente più tardi"
   ${LangFileString} MUI_TEXT_FINISH_RUN "Esegui $(^NameDA)"
   ${LangFileString} MUI_TEXT_FINISH_SHOWREADME "Mostra il file Readme"
-  ${LangFileString} MUI_BUTTONTEXT_FINISH "&Fine"  
+  ${LangFileString} MUI_BUTTONTEXT_FINISH "&Fine"
 !endif
 
 !ifdef MUI_STARTMENUPAGE
