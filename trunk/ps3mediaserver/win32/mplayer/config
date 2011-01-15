@@ -1,11 +1,10 @@
-## MPlayer Windows configuration
+## MPlayer Windows configuration - last rev. 20100716
 
 ## It's better to leave this enabled on Windows, since the console is slow.
 quiet=yes
 
-## Color Console ;)
+## Fancy Color Messages
 msgcolor=yes
-#msgmodule=yes
 
 ## Frame dropping
 #framedrop=yes
@@ -17,7 +16,10 @@ msgcolor=yes
 #afm=hwac3
 
 ## You can use the DirectX or OpenGL video output, default is directx.
+## For Vista or later you should avoid using directx vo, it will
+## disable Aero
 #vo=directx
+#vo=direct3d
 #vo=gl2
 
 ## video filtering and postprocessing
