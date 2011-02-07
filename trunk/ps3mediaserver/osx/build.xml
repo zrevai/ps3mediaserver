@@ -126,7 +126,7 @@
         	<exec executable="hdiutil">
              		<arg value="create"/>
              		<arg value="-megabytes"/>
-             		<arg value="80"/>
+             		<arg value="100"/>
              		<arg value="-srcfolder"/>
              		<arg value="${dmgFolder}"/>
              		<arg value="-format"/>
