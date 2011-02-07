@@ -99,6 +99,7 @@ public class PMSUtil {
             PMS.error("Failed to execute ifconfig", e);
         } catch (InterruptedException e) {
             PMS.error("Interrupted while waiting for ifconfig", e);
+            Thread.interrupted(); // XXX work around a Java bug - see ProcessUtils.waitFor()
         }
         return aHardwareAddress;
      }
