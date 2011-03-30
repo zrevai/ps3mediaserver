@@ -1,6 +1,5 @@
-Name:		Version/Build:		Link:
+Name:			Version/Build:		Link:
 
-FFmpeg		28671			http://oss.netfarm.it/mplayer-win32.php
-MPlayer		32848			http://oss.netfarm.it/mplayer-win32.php
-MEncoder	30369			http://oss.netfarm.it/mplayer-win32.php
-TsMuxer		1.10.6			http://www.smlabs.net/tsmuxer_en.html
+FFmpeg			28671			http://oss.netfarm.it/mplayer-win32.php
+MPlayer & MEncoder	32674 & 30369		http://oss.netfarm.it/mplayer-win32.php
+TsMuxer			1.10.6			http://www.smlabs.net/tsmuxer_en.html
