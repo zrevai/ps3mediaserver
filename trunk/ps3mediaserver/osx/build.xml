@@ -77,6 +77,10 @@
         	<copy file="FAQ" todir="${javaResources}"/>
         	<copy file="README" todir="${javaResources}"/>
         	<copy file="WEB.conf" todir="${javaResources}"/>
+		<mkdir dir="${javaResources}/documentation"/>
+		<copy todir="${javaResources}/documentation">
+			<fileset dir="documentation"/>
+		</copy>
         	<mkdir dir="${javaResources}/plugins"/>
 		<copy todir="${javaResources}/plugins">
     			<fileset dir="plugins"/>
@@ -126,7 +130,7 @@
         	<exec executable="hdiutil">
              		<arg value="create"/>
              		<arg value="-megabytes"/>
-             		<arg value="100"/>
+             		<arg value="160"/>
              		<arg value="-srcfolder"/>
              		<arg value="${dmgFolder}"/>
              		<arg value="-format"/>
