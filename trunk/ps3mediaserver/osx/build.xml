@@ -41,7 +41,7 @@
 			</manifest>    	
 			<zipgroupfileset refid="libs.ref" />
 			<fileset dir="net" includes="**/*.class" excludes="**/*.java" />
-			<fileset dir="." includes="resources/**,net/pms/*.properties" />
+			<fileset dir="." includes="resources/**,net/pms/*.properties,logback.xml" />
 		</jar>
 		
     		<delete dir="osx/classes" quiet="true" />
@@ -77,6 +77,8 @@
         	<copy file="FAQ" todir="${javaResources}"/>
         	<copy file="README" todir="${javaResources}"/>
         	<copy file="WEB.conf" todir="${javaResources}"/>
+		<copy file="logback.xml" todir="${javaResources}"/>
+		<copy file="logback.headless.xml" todir="${javaResources}"/>
 		<mkdir dir="${javaResources}/documentation"/>
 		<copy todir="${javaResources}/documentation">
 			<fileset dir="documentation"/>
