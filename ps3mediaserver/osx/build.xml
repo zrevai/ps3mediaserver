@@ -74,7 +74,6 @@
         	<copy file="LICENSE.txt" todir="${javaResources}"/>
         	<copy file="PMS.conf" todir="${javaResources}"/>
 		<replaceregexp file="${javaResources}/PMS.conf" match="mencoder_ass = true" replace="mencoder_ass = false" byline="true"/>
-        	<copy file="FAQ" todir="${javaResources}"/>
         	<copy file="README" todir="${javaResources}"/>
         	<copy file="WEB.conf" todir="${javaResources}"/>
 		<copy file="logback.xml" todir="${javaResources}"/>
