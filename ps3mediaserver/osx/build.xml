@@ -73,7 +73,6 @@
 		<copy file="CHANGELOG" todir="${javaResources}"/>
         	<copy file="LICENSE.txt" todir="${javaResources}"/>
         	<copy file="PMS.conf" todir="${javaResources}"/>
-		<replaceregexp file="${javaResources}/PMS.conf" match="mencoder_ass = true" replace="mencoder_ass = false" byline="true"/>
         	<copy file="README" todir="${javaResources}"/>
         	<copy file="WEB.conf" todir="${javaResources}"/>
 		<copy file="logback.xml" todir="${javaResources}"/>
@@ -94,9 +93,8 @@
         	<mkdir dir="${osxResources}"/>
         	<exec executable="ditto">
              		<arg value="${osx}/ffmpeg"/>
-             		<arg value="${osx}/dcrawU"/>
+             		<arg value="${osx}/dcraw"/>
              		<arg value="${osx}/mencoder"/>
-             		<arg value="${osx}/mencoder_mt"/>
              		<arg value="${osx}/mplayer"/>
              		<arg value="${osx}/flac"/>
              		<arg value="${osx}/tsMuxeR"/>
