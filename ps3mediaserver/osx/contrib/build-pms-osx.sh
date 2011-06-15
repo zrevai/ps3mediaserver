@@ -2,8 +2,8 @@
 #
 # build-pms-osx.sh
 #
-# Version: 1.8.1
-# Last updated: 2011-06-13
+# Version: 1.8.2
+# Last updated: 2011-06-15
 # Author: Patrick Atoon
 #
 #
@@ -195,7 +195,7 @@ Please run the following commands to install "yasm":
     ./configure
     make
     sudo make install
-    cd $WORKDIR
+    cd ..
 
 EOM
         exit;
@@ -1217,6 +1217,7 @@ build_ps3mediaserver() {
     cp $TARGET/bin/flac .
     cp $TARGET/bin/mplayer .
     cp $TARGET/bin/mencoder .
+    # Mencoder_mt is only needed for older revisions of mplayer, the latest revisions include multithreading by default
     #cp $TARGET/bin/mencoder_mt .
     cp $TARGET/bin/tsMuxeR .
 
