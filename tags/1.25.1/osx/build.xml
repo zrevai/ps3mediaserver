@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="PMS" default="PMS" basedir="../">
+	<property name="version" value="1.25.1" />
+	<property name="pms.jar" value="pms.jar" />
+
+	<echo message="IMPORTANT! THIS SCRIPT MUST USE MAC OS X 10.5 OR HIGHER AND JDK 1.6 TO PRODUCE A VALID PMS.JAR"/>
+	<echo message="Java Version: ${java.version}"/>
+	
+	<path id="lib.path.ref">
+		<fileset id="libs.ref" dir="lib" includes="*.jar"/>
+	</path>
+	
+	<target name="clean">
+		<delete dir="osx/dist" quiet="true" />
+		<delete dir="osx/classes" quiet="true" />
+		<delete dir="osx/src" quiet="true" />
+		<delete dir="osx/PS3 Media Server.app" quiet="true" />
+		<delete dir="osx/PS3 Media Server" quiet="true" />
+		<delete file="osx/${pms.jar}" />
+		<delete file="osx/pms-macosx-${version}.dmg" />
+	</target>
+	
+    	<!-- ================================= 
+             Target: PMS
+	     Description: Creates a PMS.jar for Mac OS X.
+             ================================= -->
+    	<target name="PMS" depends="clean">
+		<mkdir dir="osx/classes" />
+    		<mkdir dir="osx/src" />
+
+    		<copy todir="osx/src">
+    			<fileset dir="." includes="**/*.java" excludes="osx/**"/>
+    		</copy>
+    		<copy file="osx/compatibility/PMSUtil.java" tofile="osx/src/net/pms/util/PMSUtil.java"/>
+    	
+		<javac srcdir="osx/src" destdir="osx/classes" target="1.6" classpathref="lib.path.ref" debug="on" debuglevel="lines,vars,source" />
+
+		<jar basedir="osx/classes" destfile="osx/${pms.jar}" compress="off" duplicate="preserve">	
+			<manifest>
+				<attribute name="Main-Class" value="net.pms.PMS" />
+			</manifest>    	
+			<zipgroupfileset refid="libs.ref" />
+			<fileset dir="net" includes="**/*.class" excludes="**/*.java" />
+			<fileset dir="." includes="resources/**,net/pms/*.properties,logback.xml" />
+		</jar>
+		
+    		<delete dir="osx/classes" quiet="true" />
+    		<delete dir="osx/src" quiet="true" />
+	</target>
+	
+    	<property name="osx" value="osx"/>
+    	<property name="bundle" value="${osx}/PS3 Media Server.app"/>
+    
+    	<!-- ================================= 
+	     Target: MacBundle
+	     Description: Creates a Mac OS X .app bundle.
+
+	     Requires the JarBundler (2.1.0) ant task, which can be downloaded at http://informagen.com/JarBundler/
+	     To enable the task, copy jarbundler-2.1.0.jar to /usr/share/ant/lib/
+             ================================= -->
+	<target name="MacBundle" depends="PMS">
+		<taskdef name="jarbundler" classname="net.sourceforge.jarbundler.JarBundler"/>
+        	<property name="bundleResources" value="${bundle}/Contents/Resources"/>
+        	<property name="javaResources" value="${bundleResources}/Java"/>
+        	<property name="osxResources" value="${javaResources}/osx"/>
+        	
+		<jarbundler jar="${osx}/${pms.jar}" dir="${osx}" name="PS3 Media Server" signature="PS3M" mainclass="net.pms.PMS" jvmversion="1.6+" icon="${osx}/pms.icns" version="${version}" vmoptions="-Xmx768M -Xss16M -Dfile.encoding=UTF-8 -Djava.net.preferIPv4Stack=true -jar" workingdirectory="$APP_PACKAGE/Contents/Resources/Java"/>
+
+		<replaceregexp file="${bundle}/Contents/Info.plist" match="JavaApplicationStub" replace="JavaApplicationStub.setenv" byline="false"/>
+		<copy file="${osx}/JavaApplicationStub.setenv" todir="${bundle}/Contents/MacOS"/>
+		<chmod file="${bundle}/Contents/MacOS/JavaApplicationStub.setenv" perm="0755"/>
+        	
+		<copy file="CHANGELOG" todir="${javaResources}"/>
+        	<copy file="LICENSE.txt" todir="${javaResources}"/>
+        	<copy file="PMS.conf" todir="${javaResources}"/>
+        	<copy file="README" todir="${javaResources}"/>
+        	<copy file="WEB.conf" todir="${javaResources}"/>
+		<copy file="logback.xml" todir="${javaResources}"/>
+		<copy file="logback.headless.xml" todir="${javaResources}"/>
+		<mkdir dir="${javaResources}/documentation"/>
+		<copy todir="${javaResources}/documentation">
+			<fileset dir="documentation"/>
+		</copy>
+        	<mkdir dir="${javaResources}/plugins"/>
+		<copy todir="${javaResources}/plugins">
+    			<fileset dir="plugins"/>
+		</copy>
+		<copy file="${osx}/libmediainfo.dylib" todir="${javaResources}"/>
+        	<mkdir dir="${javaResources}/renderers"/>
+		<copy todir="${javaResources}/renderers">
+    			<fileset dir="renderers"/>
+		</copy>
+        	<mkdir dir="${osxResources}"/>
+        	<exec executable="ditto">
+             		<arg value="${osx}/ffmpeg"/>
+             		<arg value="${osx}/dcraw"/>
+             		<arg value="${osx}/mencoder"/>
+             		<arg value="${osx}/mplayer"/>
+             		<arg value="${osx}/flac"/>
+             		<arg value="${osx}/tsMuxeR"/>
+             		<arg value="${osxResources}"/>
+	        </exec>
+        	<chmod perm="a+x" type="file">
+             		<fileset dir="${osxResources}">
+                  		<include name="*"/>
+             		</fileset>
+        	</chmod>
+    	</target>
+
+    	<!-- ================================= 
+	     Target: DMG
+	     Description: Creates a Mac OS X DMG bundle from the .app bundle, uses tools only available on Mac OS X. Used for official releases.
+             ================================= -->
+	<target name="DMG" depends="MacBundle">
+        	<property name="dmgFolder" value="${osx}/PS3 Media Server"/>
+        	<mkdir dir="${dmgFolder}"/>
+        	<exec executable="ditto">
+             		<arg value="${bundle}"/>
+             		<arg value="${dmgFolder}/PS3 Media Server.app"/>
+        	</exec>
+        	<exec executable="osascript">
+            		<arg value="-e"/>
+            		<arg value="tell application &quot;Finder&quot; to make new alias to folder &quot;Applications&quot; of startup disk"/>
+        	</exec>
+        	<exec executable="mv">
+             		<arg value="${user.home}/Desktop/Applications"/>
+             		<arg value="${basedir}/${dmgFolder}"/>
+        	</exec>
+        	<exec executable="hdiutil">
+             		<arg value="create"/>
+             		<arg value="-megabytes"/>
+             		<arg value="160"/>
+             		<arg value="-srcfolder"/>
+             		<arg value="${dmgFolder}"/>
+             		<arg value="-format"/>
+             		<arg value="UDBZ"/>
+             		<arg value="${osx}/pms-macosx-${version}.dmg"/>
+        	</exec>
+	</target>
+</project>
