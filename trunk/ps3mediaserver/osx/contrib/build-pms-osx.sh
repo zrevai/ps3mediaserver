@@ -2,8 +2,8 @@
 #
 # build-pms-osx.sh
 #
-# Version: 1.8.2
-# Last updated: 2011-06-15
+# Version: 1.8.3
+# Last updated: 2011-06-21
 # Author: Patrick Atoon
 #
 #
@@ -1053,7 +1053,7 @@ build_ffmpeg() {
     fi
 
     if [ "$FIXED_REVISIONS" == "yes" ]; then
-        $GIT checkout "`$GIT rev-list master -n 1 --first-parent --before=2011-06-13`"
+        $GIT checkout "`$GIT rev-list master -n 1 --first-parent --before=2011-06-21`"
         exit_on_error
     fi
 
@@ -1083,8 +1083,7 @@ build_mplayer() {
     cd $SRC
 
     if [ "$FIXED_REVISIONS" == "yes" ]; then
-        REVISION="-r 33606" # Known to work
-        #REVISION="-r 29241" # Original (working) revision that is shipped with PMS-1.20.409-BETA (will not build though)
+        REVISION="-r 33685"
     else
         REVISION=""
     fi
@@ -1129,61 +1128,6 @@ build_mplayer() {
     $MAKE install
     cd $WORKDIR
 }
-
-##########################################
-# MENCODER_MT (multi-threaded)
-# http://www.mplayerhq.hu/design7/news.html
-# http://gitorious.org/ffmpeg/ffmpeg-mt
-#
-build_mencoder_mt() {
-    start_build mencoder_mt
-    cd $SRC
-
-    if [ "$FIXED_REVISIONS" == "yes" ]; then
-        REVISION="-r 33606" # Known to work
-        #REVISION="-r 29241" # Original (working) revision that is shipped with PMS-1.20.409-BETA (will not build though)
-    else
-        REVISION=""
-    fi
-
-    if [ -d mencoder_mt ]; then
-        cd mencoder_mt
-        $SVN update $REVISION
-        exit_on_error
-    else
-        $SVN checkout $REVISION svn://svn.mplayerhq.hu/mplayer/trunk mencoder_mt
-        exit_on_error
-        cd mencoder_mt
-    fi
-
-    # Remove the bundled ffmpeg and replace it with ffmpeg-mt
-    rm -rf ffmpeg
-    $GIT clone git://gitorious.org/~astrange/ffmpeg/ffmpeg-mt.git ffmpeg
-    exit_on_error
-
-    set_flags
-
-    # Extra flags for compiling mplayer
-    export CFLAGS="-O4 -fomit-frame-pointer -pipe $CFLAGS"
-    export CXXFLAGS="-O4 -fomit-frame-pointer -pipe $CXXFLAGS"
-
-    # Fribidi, theora and vorbis support seems broken in this revision, disable it for now
-    ./configure --disable-x11 --disable-gl --disable-qtx --disable-dvdread-internal \
-              --disable-fribidi --disable-theora --disable-libvorbis \
-              --with-freetype-config=$TARGET/bin/freetype-config --prefix=$TARGET
-
-    # Somehow -I/usr/X11/include still made it into the config.mak, regardless of the --disable-x11
-    $SED -i -e "s/-I\/usr\/X11\/include//g" config.mak
-
-   # Fix fribidi regression (http://lists.mplayerhq.hu/pipermail/mplayer-users/2011-May/082649.html)
-    $SED -i -e "s/#ifdef CONFIG_FRIBIDI/#if defined(CONFIG_FRIBIDI) \&\& \!defined(CODECS2HTML)/g" sub/subreader.h
-
-    $MAKE -j$THREADS
-    exit_on_error
-    cp mencoder $TARGET/bin/mencoder_mt
-    cd $WORKDIR
-}
-
 
 ##########################################
 # PS3MEDIASERVER
@@ -1282,8 +1226,6 @@ build_dcraw
 build_tsMuxeR
 build_ffmpeg
 build_mplayer
-# Mencoder_mt is only needed for older revisions of mplayer, the latest revisions include multithreading by default
-#build_mencoder_mt
 
 # Build PS3 Media Server itself
 build_ps3mediaserver
