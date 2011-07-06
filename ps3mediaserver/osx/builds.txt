@@ -3,8 +3,8 @@ Name:			Version/Build:		Link:
 dcraw			9.07			http://www.cybercom.net/~dcoffin/dcraw/
 ffmpeg			30919			http://www.ffmpeg.org/
 flac			1.2.1			http://flac.sourceforge.net/
-mencoder		33685			http://www.mplayerhq.hu/design7/news.html
-mplayer			33685			http://www.mplayerhq.hu/design7/news.html
+mencoder		33823			http://www.mplayerhq.hu/design7/news.html
+mplayer			33823			http://www.mplayerhq.hu/design7/news.html
 tsmuxer			1.10.6			http://www.smlabs.net/en/products/tsmuxer/
 
 See "contrib/build-pms-osx.sh" for the exact build details or to build custom versions.
