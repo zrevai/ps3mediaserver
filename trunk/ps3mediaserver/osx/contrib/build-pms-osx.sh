@@ -2,8 +2,8 @@
 #
 # build-pms-osx.sh
 #
-# Version: 1.8.3
-# Last updated: 2011-06-21
+# Version: 1.8.4
+# Last updated: 2011-07-06
 # Author: Patrick Atoon
 #
 #
@@ -1083,7 +1083,7 @@ build_mplayer() {
     cd $SRC
 
     if [ "$FIXED_REVISIONS" == "yes" ]; then
-        REVISION="-r 33685"
+        REVISION="-r 33823"
     else
         REVISION=""
     fi
@@ -1138,7 +1138,7 @@ build_ps3mediaserver() {
     cd $SRC
 
     if [ "$FIXED_REVISIONS" == "yes" ]; then
-        REVISION="-r 626" # To include some important OS X fixes
+        REVISION="-r 718" # Most recent official release
     else
         REVISION=""
     fi
