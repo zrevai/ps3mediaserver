@@ -2,8 +2,8 @@
 #
 # build-pms-osx.sh
 #
-# Version: 1.8.4
-# Last updated: 2011-07-06
+# Version: 1.8.5
+# Last updated: 2011-07-17
 # Author: Patrick Atoon
 #
 #
@@ -736,12 +736,12 @@ build_libpng() {
     cd $SRC
 
     if [ ! -d libpng-1.5.2 ]; then
-        $CURL -L http://downloads.sourceforge.net/project/libpng/libpng15/1.5.2/libpng-1.5.2.tar.gz > libpng-1.5.2.tar.gz
+        $CURL -L http://downloads.sourceforge.net/project/libpng/libpng15/1.5.4/libpng-1.5.4.tar.gz > libpng-1.5.4.tar.gz
         exit_on_error
-        $TAR xzf libpng-1.5.2.tar.gz
+        $TAR xzf libpng-1.5.4.tar.gz
     fi
 
-    cd libpng-1.5.2
+    cd libpng-1.5.4
     set_flags
     ./configure --disable-shared --disable-dependency-tracking --prefix=$TARGET
     $MAKE -j$THREADS
@@ -1109,7 +1109,7 @@ build_mplayer() {
     export CXXFLAGS="-O4 -fomit-frame-pointer -pipe $CXXFLAGS"
 
     # Fribidi, theora and vorbis support seems broken in this revision, disable it for now
-    ./configure --disable-x11 --disable-gl --disable-qtx --disable-dvdread-internal \
+    ./configure --disable-x11 --disable-gl --disable-qtx \
               --disable-fribidi --disable-theora --disable-libvorbis \
               --with-freetype-config=$TARGET/bin/freetype-config --prefix=$TARGET
 
