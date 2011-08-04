@@ -2,8 +2,8 @@
 #
 # build-pms-osx.sh
 #
-# Version: 1.8.5
-# Last updated: 2011-07-17
+# Version: 1.8.6
+# Last updated: 2011-08-04
 # Author: Patrick Atoon
 #
 #
@@ -47,7 +47,6 @@
 # TODO
 #
 # - Clean up dependencies that are not needed for PMS
-# - Fix fribidi
 #
 #
 # COPYRIGHT
@@ -113,10 +112,10 @@ createdir() {
 #
 set_flags() {
     # Minimum OS version as target
-    export MACOSX_DEPLOYMENT_TARGET=10.5
-    export CFLAGS="-mmacosx-version-min=10.5 -isystem /Developer/SDKs/MacOSX10.5.sdk"
-    export LDFLAGS="-mmacosx-version-min=10.5 -isysroot /Developer/SDKs/MacOSX10.5.sdk -Wl,-syslibroot,/Developer/SDKs/MacOSX10.5.sdk"
-    export CXXFLAGS="-mmacosx-version-min=10.5 -isysroot /Developer/SDKs/MacOSX10.5.sdk"
+    export MACOSX_DEPLOYMENT_TARGET=10.6
+    export CFLAGS="-mmacosx-version-min=10.6 -isystem /Developer/SDKs/MacOSX10.6.sdk"
+    export LDFLAGS="-mmacosx-version-min=10.6 -isysroot /Developer/SDKs/MacOSX10.6.sdk -Wl,-syslibroot,/Developer/SDKs/MacOSX10.6.sdk"
+    export CXXFLAGS="-mmacosx-version-min=10.6 -isysroot /Developer/SDKs/MacOSX10.6.sdk"
 
     if [ "$1" != "" ]; then
         # Use the supplied parameter string for architecture flags
@@ -1064,7 +1063,7 @@ build_ffmpeg() {
     set_flags
 
     # Theora/vorbis disabled for mplayer, also disabled here to avoid build errors
-    ./configure --enable-gpl --enable-libmp3lame --enable-libx264 --enable-libxvid \
+    ./configure --cc=/usr/bin/gcc-4.2 --enable-gpl --enable-libmp3lame --enable-libx264 --enable-libxvid \
               --disable-libtheora --disable-libvorbis --disable-shared --prefix=$TARGET
     $MAKE -j$THREADS
     exit_on_error
@@ -1083,7 +1082,7 @@ build_mplayer() {
     cd $SRC
 
     if [ "$FIXED_REVISIONS" == "yes" ]; then
-        REVISION="-r 33823"
+        REVISION="-r 33952"
     else
         REVISION=""
     fi
@@ -1108,9 +1107,12 @@ build_mplayer() {
     export CFLAGS="-O4 -fomit-frame-pointer -pipe $CFLAGS"
     export CXXFLAGS="-O4 -fomit-frame-pointer -pipe $CXXFLAGS"
 
-    # Fribidi, theora and vorbis support seems broken in this revision, disable it for now
-    ./configure --disable-x11 --disable-gl --disable-qtx \
-              --disable-fribidi --disable-theora --disable-libvorbis \
+    # /usr/bin/gcc gives compile errors for MPlayer on OSX Lion.
+    # See https://svn.macports.org/ticket/30279
+
+    # Theora and vorbis support seems broken in this revision, disable it for now
+    ./configure --cc=/usr/bin/gcc-4.2 --disable-x11 --disable-gl --disable-qtx \
+              --enable-fribidi --disable-theora --disable-libvorbis \
               --with-freetype-config=$TARGET/bin/freetype-config --prefix=$TARGET
 
     # Somehow -I/usr/X11/include still made it into the config.mak, regardless of the --disable-x11
