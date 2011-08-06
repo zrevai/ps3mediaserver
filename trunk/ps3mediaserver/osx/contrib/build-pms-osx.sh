@@ -704,13 +704,13 @@ build_libmediainfo() {
     start_build libmediainfo
     cd $SRC
 
-    if [ ! -d libmediainfo_0.7.44 ]; then
-        $CURL -L http://downloads.sourceforge.net/project/mediainfo/source/libmediainfo/0.7.44/libmediainfo_0.7.44.tar.bz2 > libmediainfo_0.7.44.tar.bz2
+    if [ ! -d libmediainfo_0.7.47 ]; then
+        $CURL -L http://downloads.sourceforge.net/project/mediainfo/source/libmediainfo/0.7.47/libmediainfo_0.7.47.tar.bz2 > libmediainfo_0.7.47.tar.bz2
         exit_on_error
-        $TAR xjf libmediainfo_0.7.44.tar.bz2 -s /MediaInfoLib/libmediainfo_0.7.44/
+        $TAR xjf libmediainfo_0.7.47.tar.bz2 -s /MediaInfoLib/libmediainfo_0.7.47/
     fi
 
-    cd libmediainfo_0.7.44
+    cd libmediainfo_0.7.47
     cd Project/GNU/Library
     export CFLAGS=
     export LDFLAGS=
