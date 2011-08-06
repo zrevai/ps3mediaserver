@@ -2,8 +2,8 @@
 #
 # build-pms-osx.sh
 #
-# Version: 1.8.6
-# Last updated: 2011-08-04
+# Version: 1.8.7
+# Last updated: 2011-08-06
 # Author: Patrick Atoon
 #
 #
@@ -1106,6 +1106,10 @@ build_mplayer() {
     # Extra flags for compiling mplayer
     export CFLAGS="-O4 -fomit-frame-pointer -pipe $CFLAGS"
     export CXXFLAGS="-O4 -fomit-frame-pointer -pipe $CXXFLAGS"
+
+    # Fix -lfribidi omission in configure script
+    # See: http://www.ps3mediaserver.org/forum/viewtopic.php?f=14&t=9878&start=60#p54902
+    $SED -i -e "s/def_fribidi='#define CONFIG_FRIBIDI 1'/def_fribidi='#define CONFIG_FRIBIDI 1';_ld_tmp='-lfribidi'/g" configure
 
     # /usr/bin/gcc gives compile errors for MPlayer on OSX Lion.
     # See https://svn.macports.org/ticket/30279
