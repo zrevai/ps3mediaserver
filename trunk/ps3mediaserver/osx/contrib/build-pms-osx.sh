@@ -2,8 +2,8 @@
 #
 # build-pms-osx.sh
 #
-# Version: 1.8.7
-# Last updated: 2011-08-06
+# Version: 1.8.8
+# Last updated: 2011-08-20
 # Author: Patrick Atoon
 #
 #
@@ -85,6 +85,7 @@ THREADS="2"
 ANT=/usr/bin/ant
 CURL=/usr/bin/curl
 GCC=/usr/bin/gcc
+GCC2=/usr/bin/gcc-4.2
 GIT=/usr/local/git/bin/git
 HDID=/usr/bin/hdid
 HDIUTIL=/usr/bin/hdiutil
@@ -1063,7 +1064,7 @@ build_ffmpeg() {
     set_flags
 
     # Theora/vorbis disabled for mplayer, also disabled here to avoid build errors
-    ./configure --cc=/usr/bin/gcc-4.2 --enable-gpl --enable-libmp3lame --enable-libx264 --enable-libxvid \
+    ./configure --cc=$GCC2 --enable-gpl --enable-libmp3lame --enable-libx264 --enable-libxvid \
               --disable-libtheora --disable-libvorbis --disable-shared --prefix=$TARGET
     $MAKE -j$THREADS
     exit_on_error
@@ -1082,7 +1083,7 @@ build_mplayer() {
     cd $SRC
 
     if [ "$FIXED_REVISIONS" == "yes" ]; then
-        REVISION="-r 33952"
+        REVISION="-r 33999"
     else
         REVISION=""
     fi
@@ -1109,13 +1110,13 @@ build_mplayer() {
 
     # Fix -lfribidi omission in configure script
     # See: http://www.ps3mediaserver.org/forum/viewtopic.php?f=14&t=9878&start=60#p54902
-    $SED -i -e "s/def_fribidi='#define CONFIG_FRIBIDI 1'/def_fribidi='#define CONFIG_FRIBIDI 1';_ld_tmp='-lfribidi'/g" configure
+    $SED -i -e "s/def_fribidi='#define CONFIG_FRIBIDI 1'/def_fribidi='#define CONFIG_FRIBIDI 1'; ld_tmp='-lfribidi'/g" configure
 
     # /usr/bin/gcc gives compile errors for MPlayer on OSX Lion.
     # See https://svn.macports.org/ticket/30279
 
     # Theora and vorbis support seems broken in this revision, disable it for now
-    ./configure --cc=/usr/bin/gcc-4.2 --disable-x11 --disable-gl --disable-qtx \
+    ./configure --cc=$GCC2 --disable-x11 --disable-gl --disable-qtx \
               --enable-fribidi --disable-theora --disable-libvorbis \
               --with-freetype-config=$TARGET/bin/freetype-config --prefix=$TARGET
 
