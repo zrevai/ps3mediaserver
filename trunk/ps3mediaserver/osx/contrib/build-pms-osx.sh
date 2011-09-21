@@ -2,8 +2,8 @@
 #
 # build-pms-osx.sh
 #
-# Version: 1.8.8
-# Last updated: 2011-08-20
+# Version: 1.8.9
+# Last updated: 2011-09-21
 # Author: Patrick Atoon
 #
 #
@@ -398,13 +398,13 @@ build_freetype() {
     start_build freetype
     cd $SRC
 
-    if [ ! -d freetype-2.4.4 ]; then
-        $CURL -L http://download.savannah.gnu.org/releases/freetype/freetype-2.4.4.tar.gz > freetype-2.4.4.tar.gz
+    if [ ! -d freetype-2.4.6 ]; then
+        $CURL -L http://download.savannah.gnu.org/releases/freetype/freetype-2.4.6.tar.gz > freetype-2.4.6.tar.gz
         exit_on_error
-        $TAR xzf freetype-2.4.4.tar.gz
+        $TAR xzf freetype-2.4.6.tar.gz
     fi
 
-    cd freetype-2.4.4
+    cd freetype-2.4.6
     set_flags
     ./configure --disable-shared --disable-dependency-tracking --prefix=$TARGET
     $MAKE -j$THREADS
@@ -1083,7 +1083,7 @@ build_mplayer() {
     cd $SRC
 
     if [ "$FIXED_REVISIONS" == "yes" ]; then
-        REVISION="-r 33999"
+        REVISION="-r 34118"
     else
         REVISION=""
     fi
@@ -1108,22 +1108,18 @@ build_mplayer() {
     export CFLAGS="-O4 -fomit-frame-pointer -pipe $CFLAGS"
     export CXXFLAGS="-O4 -fomit-frame-pointer -pipe $CXXFLAGS"
 
-    # Fix -lfribidi omission in configure script
-    # See: http://www.ps3mediaserver.org/forum/viewtopic.php?f=14&t=9878&start=60#p54902
-    $SED -i -e "s/def_fribidi='#define CONFIG_FRIBIDI 1'/def_fribidi='#define CONFIG_FRIBIDI 1'; ld_tmp='-lfribidi'/g" configure
-
     # /usr/bin/gcc gives compile errors for MPlayer on OSX Lion.
     # See https://svn.macports.org/ticket/30279
 
     # Theora and vorbis support seems broken in this revision, disable it for now
     ./configure --cc=$GCC2 --disable-x11 --disable-gl --disable-qtx \
-              --enable-fribidi --disable-theora --disable-libvorbis \
+              --disable-theora --disable-libvorbis \
               --with-freetype-config=$TARGET/bin/freetype-config --prefix=$TARGET
 
     # Somehow -I/usr/X11/include still made it into the config.mak, regardless of the --disable-x11
     $SED -i -e "s/-I\/usr\/X11\/include//g" config.mak
 
-   # Fix fribidi regression (http://lists.mplayerhq.hu/pipermail/mplayer-users/2011-May/082649.html)
+    # Fix fribidi regression (http://lists.mplayerhq.hu/pipermail/mplayer-users/2011-May/082649.html)
     $SED -i -e "s/#ifdef CONFIG_FRIBIDI/#if defined(CONFIG_FRIBIDI) \&\& \!defined(CODECS2HTML)/g" sub/subreader.h
 
     # Remove the ffmpeg directory and copy the compiled ffmpeg again to avoid "make" rebuilding it
