@@ -2,8 +2,8 @@
 #
 # build-pms-osx.sh
 #
-# Version: 1.8.9
-# Last updated: 2011-09-21
+# Version: 1.8.10
+# Last updated: 2011-09-25
 # Author: Patrick Atoon
 #
 #
@@ -382,7 +382,8 @@ build_fontconfig() {
 
     cd fontconfig-2.8.0
     set_flags
-    ./configure --disable-shared --disable-dependency-tracking --prefix=$TARGET
+    # Enabling libxml2 causes MPlayer to not autodetect fontconfig, therefore disabling it
+    ./configure --disable-shared --disable-dependency-tracking --disable-libxml2 --prefix=$TARGET
     $MAKE -j$THREADS
     exit_on_error
     $MAKE install
@@ -1083,7 +1084,7 @@ build_mplayer() {
     cd $SRC
 
     if [ "$FIXED_REVISIONS" == "yes" ]; then
-        REVISION="-r 34118"
+        REVISION="-r 34132"
     else
         REVISION=""
     fi
@@ -1198,12 +1199,13 @@ initialize
 build_zlib
 build_expat
 build_faad2
-build_fontconfig
+build_iconv
 build_freetype
+# Note: fontconfig requires iconv and freetype to build
+build_fontconfig
 build_fribidi
 build_giflib
 build_jpeg
-build_iconv
 build_ncurses
 build_lame
 build_libdca
