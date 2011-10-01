@@ -5,11 +5,11 @@
 
 	<echo message="IMPORTANT! THIS SCRIPT MUST USE MAC OS X 10.5 OR HIGHER AND JDK 1.6 TO PRODUCE A VALID PMS.JAR"/>
 	<echo message="Java Version: ${java.version}"/>
-	
+
 	<path id="lib.path.ref">
 		<fileset id="libs.ref" dir="lib" includes="*.jar"/>
 	</path>
-	
+
 	<target name="clean">
 		<delete dir="osx/dist" quiet="true" />
 		<delete dir="osx/classes" quiet="true" />
@@ -19,7 +19,7 @@
 		<delete file="osx/${pms.jar}" />
 		<delete file="osx/pms-macosx-${version}.dmg" />
 	</target>
-	
+
     	<!-- ================================= 
              Target: PMS
 	     Description: Creates a PMS.jar for Mac OS X.
@@ -32,7 +32,7 @@
     			<fileset dir="." includes="**/*.java" excludes="osx/**"/>
     		</copy>
     		<copy file="osx/compatibility/PMSUtil.java" tofile="osx/src/net/pms/util/PMSUtil.java"/>
-    	
+
 		<javac srcdir="osx/src" destdir="osx/classes" target="1.6" classpathref="lib.path.ref" debug="on" debuglevel="lines,vars,source" />
 
 		<jar basedir="osx/classes" destfile="osx/${pms.jar}" compress="off" duplicate="preserve">	
@@ -43,14 +43,14 @@
 			<fileset dir="net" includes="**/*.class" excludes="**/*.java" />
 			<fileset dir="." includes="resources/**,net/pms/*.properties,logback.xml" />
 		</jar>
-		
+
     		<delete dir="osx/classes" quiet="true" />
     		<delete dir="osx/src" quiet="true" />
 	</target>
-	
+
     	<property name="osx" value="osx"/>
     	<property name="bundle" value="${osx}/PS3 Media Server.app"/>
-    
+
     	<!-- ================================= 
 	     Target: MacBundle
 	     Description: Creates a Mac OS X .app bundle.
@@ -63,13 +63,13 @@
         	<property name="bundleResources" value="${bundle}/Contents/Resources"/>
         	<property name="javaResources" value="${bundleResources}/Java"/>
         	<property name="osxResources" value="${javaResources}/osx"/>
-        	
+
 		<jarbundler jar="${osx}/${pms.jar}" dir="${osx}" name="PS3 Media Server" signature="PS3M" mainclass="net.pms.PMS" jvmversion="1.6+" icon="${osx}/pms.icns" version="${version}" vmoptions="-Xmx768M -Xss16M -Dfile.encoding=UTF-8 -Djava.net.preferIPv4Stack=true -jar" workingdirectory="$APP_PACKAGE/Contents/Resources/Java"/>
 
 		<replaceregexp file="${bundle}/Contents/Info.plist" match="JavaApplicationStub" replace="JavaApplicationStub.setenv" byline="false"/>
 		<copy file="${osx}/JavaApplicationStub.setenv" todir="${bundle}/Contents/MacOS"/>
 		<chmod file="${bundle}/Contents/MacOS/JavaApplicationStub.setenv" perm="0755"/>
-        	
+
 		<copy file="CHANGELOG" todir="${javaResources}"/>
         	<copy file="LICENSE.txt" todir="${javaResources}"/>
         	<copy file="PMS.conf" todir="${javaResources}"/>
