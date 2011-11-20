@@ -1,0 +1,7 @@
+Name:                Version/Build:   Link:
+
+FFmpeg               31564            http://oss.netfarm.it/mplayer-win32.php
+flac                 1.2.1            http://flac.sourceforge.net/
+MPlayer & MEncoder   SB18             http://www.spirton.com/
+TsMuxer              1.10.6           http://www.smlabs.net/tsmuxer_en.html
+convert              6.7.1            http://www.imagemagick.org
