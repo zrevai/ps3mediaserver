@@ -1,7 +1,7 @@
 Name:			Version/Build:		Link:
 
 dcraw			9.07			http://www.cybercom.net/~dcoffin/dcraw/
-ffmpeg			34613			http://www.ffmpeg.org/
+ffmpeg			30919			http://www.ffmpeg.org/
 flac			1.2.1			http://flac.sourceforge.net/
 mencoder		34354-SB18		http://www.mplayerhq.hu/design7/news.html
 mplayer			34354-SB18		http://www.mplayerhq.hu/design7/news.html
