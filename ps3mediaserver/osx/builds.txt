@@ -3,8 +3,8 @@ Name:			Version/Build:		Link:
 dcraw			9.07			http://www.cybercom.net/~dcoffin/dcraw/
 ffmpeg			0.9.1			http://www.ffmpeg.org/
 flac			1.2.1			http://flac.sourceforge.net/
-mencoder		34577-SB21		http://www.spirton.com/mplayer-mencoder-subjunk-build/
-mplayer			34577-SB21		http://www.spirton.com/mplayer-mencoder-subjunk-build/
+mencoder		34587-SB22		http://www.spirton.com/mplayer-mencoder-subjunk-build/
+mplayer			34587-SB22		http://www.spirton.com/mplayer-mencoder-subjunk-build/
 tsmuxer			1.10.6			http://www.smlabs.net/en/products/tsmuxer/
 libmediainfo.dylib	0.7.47			http://mediainfo.sourceforge.net/
 
