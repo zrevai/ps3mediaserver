@@ -1,0 +1,1 @@
+Don't update jna, h2, netty or nsisant since their newer versions cause problems, unless you want to fix those problems along with the update.
