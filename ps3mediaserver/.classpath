@@ -16,15 +16,15 @@
 			<attribute name="javadoc_location" value="jar:platform:/resource/ps3mediaserver/lib/commons-lang-2.6-javadoc.zip!/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry exported="true" kind="lib" path="lib/commons-codec-1.5.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/commons-codec-1.6.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/jaudiotagger-2.0.3.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/h2-1.1.105.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/slf4j-api-1.6.2.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/logback-core-0.9.29.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/logback-classic-0.9.29.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/slf4j-api-1.6.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/logback-core-1.0.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/logback-classic-1.0.0.jar"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry exported="true" kind="lib" path="lib/bsh-core-2.0b4.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/jdom-1.1.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jdom-1.1.2.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/rome-1.0.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/cuelib-1.2.1-2008-06-13.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/netty-3.2.4.Final.jar" sourcepath="lib/netty-3.2.4.Final-sources.jar"/>
