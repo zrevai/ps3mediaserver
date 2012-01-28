@@ -1,6 +1,21 @@
 Changelog:
 ==========
 
+2012-01-29 - 1.50.1
+
+	Improved audio/video synchronisation when using tsMuxeR
+	Updated MPlayer/MEncoder to SB22 from SB18
+	Language updates:
+		Russian (thanks, Tianuchka!)
+		Clarified some settings in all languages
+	Fixed delay when entering the media server
+	Improved support for Samsung AllShare devices
+	Updated MediaInfo to 0.7.53 from 0.7.51
+	Updated JRE auto-download to 7u2 from 7u1
+	Updated FFmpeg to r35509 from r31564
+	Added country code thumbnails (Thanks, happy-neko!)
+	Fixed #1274
+
 2011-11-20 - 1.50.0
 
 	Backwards-incompatible API changes (for plugin developers/packagers) - see http://tinyurl.com/3qtgk5k for more details
