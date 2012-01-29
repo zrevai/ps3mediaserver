@@ -127,7 +127,7 @@ public class HTTPServer implements Runnable {
 				hostName = InetAddress.getLocalHost().getHostAddress();
 			}
 
-			runnable = new Thread(this);
+			runnable = new Thread(this, "HTTP Server");
 			runnable.setDaemon(false);
 			runnable.start();
 		} else {
@@ -252,7 +252,7 @@ public class HTTPServer implements Runnable {
 				}
 				if (!ignore) {
 					RequestHandler request = new RequestHandler(socket);
-					Thread thread = new Thread(request);
+					Thread thread = new Thread(request, "Request Handler");
 					thread.start();
 				}
 			} catch (ClosedByInterruptException e) {
