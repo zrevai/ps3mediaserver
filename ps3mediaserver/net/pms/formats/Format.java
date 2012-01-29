@@ -102,13 +102,13 @@ public abstract class Format implements Cloneable {
 	 */
 	@Deprecated
 	public abstract boolean ps3compatible();
-
+	
 	/**
 	 * Returns whether or not a format can be handled by the renderer natively.
 	 * This means the format can be streamed instead of having to be transcoded.
 	 * 
 	 * @return True if the format can be handled by the renderer, false otherwise.
-	 * 
+	 *
 	 * @since 1.50.1
 	 */
 	public boolean isCompatible(DLNAMediaInfo media, RendererConfiguration renderer) {
@@ -214,6 +214,7 @@ public abstract class Format implements Cloneable {
 				}
 			}
 		}
+
 		if (moreExtensions != null && moreExtensions.length() > 0) {
 			StringTokenizer st = new StringTokenizer(moreExtensions, ",");
 
