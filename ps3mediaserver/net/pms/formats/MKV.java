@@ -40,9 +40,11 @@ public class MKV extends MPG {
 	/**
 	 * {@inheritDoc}
 	 */
-	public String[] getFilenameExtensions() {
-		return new String[] { "mkv", "dv", "ty", "mov", "ogm", "ogv", "hdmov",
-				"hdm", "rmv", "rmvb", "rm", "asf", "evo", "asx", "flv", "m2v",
-				"3gp", "3g2" };
+	public String[] getId() {
+		return new String[] {
+			"mkv", "dv", "ty", "mov", "ogm", "ogv", "hdmov",
+			"hdm", "rmv", "rmvb", "rm", "asf", "evo", "asx", "flv", "m2v",
+			"3gp", "3g2"
+		};
 	}
 }
