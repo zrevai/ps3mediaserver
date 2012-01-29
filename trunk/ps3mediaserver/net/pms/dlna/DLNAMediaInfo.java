@@ -361,7 +361,7 @@ public class DLNAMediaInfo implements Cloneable {
 				setParsing(false);
 			}
 		};
-		Thread failsafe = new Thread(r);
+		Thread failsafe = new Thread(r, "FFMpeg Thumbnail Failsafe");
 		failsafe.start();
 		pw.runInSameThread();
 		setParsing(false);
@@ -413,7 +413,7 @@ public class DLNAMediaInfo implements Cloneable {
 				setParsing(false);
 			}
 		};
-		Thread failsafe = new Thread(r);
+		Thread failsafe = new Thread(r, "MPlayer Thumbnail Failsafe");
 		failsafe.start();
 		pw.runInSameThread();
 		setParsing(false);
@@ -457,7 +457,7 @@ public class DLNAMediaInfo implements Cloneable {
 				setParsing(false);
 			}
 		};
-		Thread failsafe = new Thread(r);
+		Thread failsafe = new Thread(r, "ImageMagick Thumbnail Failsafe");
 		failsafe.start();
 		pw.runInSameThread();
 		setParsing(false);
@@ -1216,7 +1216,7 @@ public class DLNAMediaInfo implements Cloneable {
 				pw.stopProcess();
 			}
 		};
-		Thread failsafe = new Thread(r);
+		Thread failsafe = new Thread(r, "FFMpeg AnnexB Frame Header Failsafe");
 		failsafe.start();
 		pw.runInSameThread();
 		if (ffmpeg_annexb_failure) {
