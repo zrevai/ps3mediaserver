@@ -550,7 +550,7 @@ public abstract class DLNAResource extends HTTPResource implements Cloneable, Ru
 						boolean isIncompatible = false;
 
 						// FIXME: Remove PS3 specific logic to support other renderers
-						if (!parserV2 && !child.getExt().ps3compatible()) {
+						if (!child.getExt().isCompatible(child.getMedia(),getDefaultRenderer())) {
 							isIncompatible = true;
 						}
 
@@ -590,7 +590,7 @@ public abstract class DLNAResource extends HTTPResource implements Cloneable, Ru
 								}
 							}
 						}
-					} else if (!child.getExt().ps3compatible() && !child.isFolder()) {
+					} else if (!child.getExt().isCompatible(child.getMedia(),getDefaultRenderer()) && !child.isFolder()) {
 						// FIXME: Remove PS3 specific logic to support other renderers
 						getChildren().remove(child);
 					}
@@ -603,7 +603,7 @@ public abstract class DLNAResource extends HTTPResource implements Cloneable, Ru
 					child.second = newChild;
 
 					// FIXME: Remove PS3 specific logic to support other renderers
-					if (!newChild.getExt().ps3compatible() && newChild.getExt().getProfiles().size() > 0) {
+					if (!newChild.getExt().isCompatible(newChild.getMedia(),getDefaultRenderer()) && newChild.getExt().getProfiles().size() > 0) {
 						newChild.setPlayer(PMS.get().getPlayer(newChild.getExt().getProfiles().get(0), newChild.getExt()));
 					}
 					if (child.getMedia() != null && child.getMedia().isSecondaryFormatValid()) {
