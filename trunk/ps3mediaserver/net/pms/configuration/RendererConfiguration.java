@@ -168,6 +168,26 @@ public class RendererConfiguration {
 		}
 		return null;
 	}
+	/**
+	 * Tries to find a matching renderer configuration based on the name of
+	 * the renderer. Returns true if the provided name is equal to or a
+	 * substring of the renderer name defined in a configuration, where case
+	 * does not matter.
+	 *
+	 * @param name The renderer name to match.
+	 * @return The matching renderer configuration or <code>null</code>
+	 *
+	 * @since 1.50.1
+	 */
+	public static RendererConfiguration getRendererConfigurationByName(String name) {
+		for (RendererConfiguration conf : renderersConfs) {
+			if (conf.getRendererName().toLowerCase().contains(name.toLowerCase())) {
+				return conf;
+			}
+		}
+
+		return null;
+	}
 
 	private final File configurationFile;
 	private final PropertiesConfiguration configuration;
@@ -849,8 +869,14 @@ public class RendererConfiguration {
 		}
 
 		if (format != null) {
+			String noTranscode = "";
+
+			if (PMS.getConfiguration() != null) {
+				noTranscode = PMS.getConfiguration().getNoTranscode();
+			}
+
 			// Is the format among the ones to be streamed?
-			return format.skip(PMS.getConfiguration().getNoTranscode(), getStreamedExtensions());
+			return format.skip(noTranscode, getStreamedExtensions());
 		} else {
 			// Not natively supported.
 			return false;
