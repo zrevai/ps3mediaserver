@@ -1,6 +1,10 @@
 Changelog:
 ==========
 
+2012-??-?? - 1.50.2
+
+	Added renderer configuration file for Philips TV (thanks, leroy!)
+
 2012-01-29 - 1.50.1
 
 	Improved audio/video synchronisation when using tsMuxeR
