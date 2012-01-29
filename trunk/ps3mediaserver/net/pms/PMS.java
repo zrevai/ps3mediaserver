@@ -611,10 +611,10 @@ public class PMS {
 		OutputParams output = new OutputParams(configuration);
 		output.noexitcheck = true;
 		ProcessWrapperImpl pwuninstall = new ProcessWrapperImpl(cmdArray, output);
-		pwuninstall.run();
+		pwuninstall.runInSameThread();
 		cmdArray = new String[]{"win32/service/wrapper.exe", "-i", "wrapper.conf"};
 		ProcessWrapperImpl pwinstall = new ProcessWrapperImpl(cmdArray, new OutputParams(configuration));
-		pwinstall.run();
+		pwuninstall.runInSameThread();
 		return pwinstall.isSuccess();
 	}
 
