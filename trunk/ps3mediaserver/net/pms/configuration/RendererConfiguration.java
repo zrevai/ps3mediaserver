@@ -77,11 +77,10 @@ public class RendererConfiguration {
 			}
 		}
 	}
-
 	private RootFolder rootFolder;
 
 	public static void resetAllRenderers() {
-		for(RendererConfiguration rc  : renderersConfs) {
+		for (RendererConfiguration rc : renderersConfs) {
 			rc.rootFolder = null;
 		}
 	}
@@ -96,8 +95,9 @@ public class RendererConfiguration {
 
 	/**
 	 * Associate an IP address with this renderer. The association will
-	 * persist between requests, allowing the renderer to be recognized
-	 * by its address in later requests.
+	 * persist between requests, allowing the renderer to be recognized by
+	 * its address in later requests.
+	 *
 	 * @param sa The IP address to associate.
 	 * @see #getRendererConfigurationBySocketAddress(InetAddress)
 	 */
@@ -110,6 +110,17 @@ public class RendererConfiguration {
 		return addressAssociation.get(sa);
 	}
 
+	/**
+	 * Tries to find a matching renderer configuration based on a request
+	 * header line with a User-Agent header. These matches are made using
+	 * the "UserAgentSearch" configuration option in a renderer.conf.
+	 * Returns the matched configuration or
+	 * <code>null</code> if no match could be found.
+	 *
+	 * @param userAgentString The request header line.
+	 * @return The matching renderer configuration or
+	 * <code>null</code>.
+	 */
 	public static RendererConfiguration getRendererConfigurationByUA(String userAgentString) {
 		for (RendererConfiguration r : renderersConfs) {
 			if (r.matchUserAgent(userAgentString)) {
@@ -132,6 +143,18 @@ public class RendererConfiguration {
 		return r;
 	}
 
+	/**
+	 * Tries to find a matching renderer configuration based on a request
+	 * header line with an additional, non-User-Agent header. These matches
+	 * are made based on the "UserAgentAdditionalHeader" and
+	 * "UserAgentAdditionalHeaderSearch" configuration options in a
+	 * renderer.conf. Returns the matched configuration or
+	 * <code>null</code> if no match could be found.
+	 *
+	 * @param header The request header line.
+	 * @return The matching renderer configuration or
+	 * <code>null</code>.
+	 */
 	public static RendererConfiguration getRendererConfigurationByUAAHH(String header) {
 		for (RendererConfiguration r : renderersConfs) {
 			if (StringUtils.isNotBlank(r.getUserAgentAdditionalHttpHeader()) && header.startsWith(r.getUserAgentAdditionalHttpHeader())) {
@@ -143,9 +166,7 @@ public class RendererConfiguration {
 		}
 		return null;
 	}
-	/*
-	 * 
-	 */
+
 	private final File configurationFile;
 	private final PropertiesConfiguration configuration;
 	private FormatConfiguration formatConfiguration;
@@ -181,7 +202,6 @@ public class RendererConfiguration {
 	public boolean isFDSSDP() {
 		return getRendererName().toUpperCase().contains("FDSSDP");
 	}
-
 	private static final String RENDERER_NAME = "RendererName";
 	private static final String RENDERER_ICON = "RendererIcon";
 	private static final String USER_AGENT = "UserAgentSearch";
@@ -191,14 +211,12 @@ public class RendererConfiguration {
 	private static final String AUDIO = "Audio";
 	private static final String IMAGE = "Image";
 	private static final String SEEK_BY_TIME = "SeekByTime";
-
 	private static final String MPEGPSAC3 = "MPEGAC3";
 	private static final String MPEGTSAC3 = "MPEGTSAC3";
 	private static final String WMV = "WMV";
 	private static final String LPCM = "LPCM";
 	private static final String WAV = "WAV";
 	private static final String MP3 = "MP3";
-
 	private static final String TRANSCODE_AUDIO = "TranscodeAudio";
 	private static final String TRANSCODE_VIDEO = "TranscodeVideo";
 	private static final String DEFAULT_VBV_BUFSIZE = "DefaultVBVBufSize";
@@ -229,10 +247,8 @@ public class RendererConfiguration {
 	private static final String SHOW_SUB_METADATA = "ShowSubMetadata";
 	private static final String DLNA_TREE_HACK = "CreateDLNATreeFaster";
 	private static final String CHUNKED_TRANSFER = "ChunkedTransfer";
-
 	// Sony devices require JPG thumbnails
 	private static final String FORCE_JPG_THUMBNAILS = "ForceJPGThumbnails";
-
 	// Ditlew
 	private static final String SHOW_DVD_TITLE_DURATION = "ShowDVDTitleDuration";
 	private static final String CBR_VIDEO_BITRATE = "CBRVideoBitrate";
