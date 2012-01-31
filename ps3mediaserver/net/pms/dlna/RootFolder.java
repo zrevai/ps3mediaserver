@@ -490,8 +490,10 @@ public class RootFolder extends DLNAResource {
 	}
 
 
-	private VirtualFolder createApertureAlbum(HashMap<?, ?> photoList,
-							HashMap<?, ?> album, ArrayList<?> listOfAlbums) {
+	private VirtualFolder createApertureAlbum(
+		HashMap<?, ?> photoList,
+		HashMap<?, ?> album, ArrayList<?> listOfAlbums
+	) {
 
 		ArrayList<?> albumPhotos;
 		int albumId = (Integer)album.get("AlbumId");
@@ -728,7 +730,7 @@ public class RootFolder extends DLNAResource {
 					configuration.setMencoderAssDefaultStyle(newValue);
 					return newValue;
 				}
-			}); 
+			});
 
 			res.addChild(new VirtualVideoAction(Messages.getString("TrTab2.28"), configuration.isDTSEmbedInPCM()) {
 				@Override
