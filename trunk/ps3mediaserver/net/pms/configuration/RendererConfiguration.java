@@ -79,6 +79,7 @@ public class RendererConfiguration {
 			}
 		}
 	}
+
 	private RootFolder rootFolder;
 
 	public static void resetAllRenderers() {
@@ -224,6 +225,7 @@ public class RendererConfiguration {
 	public boolean isFDSSDP() {
 		return getRendererName().toUpperCase().contains("FDSSDP");
 	}
+
 	private static final String RENDERER_NAME = "RendererName";
 	private static final String RENDERER_ICON = "RendererIcon";
 	private static final String USER_AGENT = "UserAgentSearch";
@@ -274,6 +276,7 @@ public class RendererConfiguration {
 
 	// Sony devices require JPG thumbnails
 	private static final String FORCE_JPG_THUMBNAILS = "ForceJPGThumbnails";
+
 	// Ditlew
 	private static final String SHOW_DVD_TITLE_DURATION = "ShowDVDTitleDuration";
 	private static final String CBR_VIDEO_BITRATE = "CBRVideoBitrate";
