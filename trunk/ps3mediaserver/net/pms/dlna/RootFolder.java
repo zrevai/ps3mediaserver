@@ -60,7 +60,7 @@ import com.sun.jna.Platform;
 
 public class RootFolder extends DLNAResource {
 	private static final Logger logger = LoggerFactory.getLogger(RootFolder.class);
-	private PmsConfiguration configuration = PMS.getConfiguration();
+	private final PmsConfiguration configuration = PMS.getConfiguration();
 	private boolean running;
 
 	public RootFolder() {
@@ -732,19 +732,19 @@ public class RootFolder extends DLNAResource {
 				}
 			});
 
-			res.addChild(new VirtualVideoAction(Messages.getString("TrTab2.28"), configuration.isDTSEmbedInPCM()) {
-				@Override
-				public boolean enable() {
-					configuration.setDTSEmbedInPCM(!configuration.isDTSEmbedInPCM());
-					return configuration.isDTSEmbedInPCM();
-				}
-			});
-
 			res.addChild(new VirtualVideoAction(Messages.getString("PMS.7"), configuration.getSkipLoopFilterEnabled()) {
 				@Override
 				public boolean enable() {
 					configuration.setSkipLoopFilterEnabled(!configuration.getSkipLoopFilterEnabled());
 					return configuration.getSkipLoopFilterEnabled();
+				}
+			});
+
+			res.addChild(new VirtualVideoAction(Messages.getString("TrTab2.28"), configuration.isDTSEmbedInPCM()) {
+				@Override
+				public boolean enable() {
+					configuration.setDTSEmbedInPCM(!configuration.isDTSEmbedInPCM());
+					return configuration.isDTSEmbedInPCM();
 				}
 			});
 
@@ -762,10 +762,7 @@ public class RootFolder extends DLNAResource {
 			res.addChild(new VirtualVideoAction(Messages.getString("LooksFrame.12"), true) {
 				@Override
 				public boolean enable() {
-					try {
-						PMS.get().reset();
-					} catch (IOException e) {
-					}
+					PMS.get().reset();
 					return true;
 				}
 			});

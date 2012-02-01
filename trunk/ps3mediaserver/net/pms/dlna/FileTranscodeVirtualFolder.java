@@ -115,6 +115,7 @@ public class FileTranscodeVirtualFolder extends VirtualFolder {
 					justStreamed.setNoName(true);
 					addChildInternal(justStreamed);
 					addChapterFile(justStreamed);
+
 					if (renderer != null) {
 						logger.debug("Duplicate " + ref.getName() + " for direct streaming to renderer: " + renderer.getRendererName());
 					}

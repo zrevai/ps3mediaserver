@@ -31,5 +31,6 @@
 	<classpathentry exported="true" kind="lib" path="lib/mediautil-1.0.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/sanselan-0.97-incubator.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/gson-1.7.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/applejavaextensions-1.5.4.jar"/>
 	<classpathentry kind="output" path="eclipse-classes"/>
 </classpath>

@@ -33,7 +33,7 @@ import javax.swing.JScrollPane;
 
 import net.pms.Messages;
 import net.pms.PMS;
-import net.pms.util.PMSUtil;
+import net.pms.util.PropertiesUtil;
 
 import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.layout.CellConstraints;
@@ -59,14 +59,16 @@ public class AboutTab {
 	public JComponent build() {
 		FormLayout layout = new FormLayout(
 			"0:grow, pref, 0:grow",
-			"pref, 3dlu, pref, 12dlu, pref, 3dlu, pref, 3dlu, pref, 3dlu, p, 3dlu, p, 3dlu, p");
+			"pref, 3dlu, pref, 3dlu, pref, 12dlu, pref, 3dlu, pref, 3dlu, pref, 3dlu, p, 3dlu, p, 3dlu, p");
 
 		PanelBuilder builder = new PanelBuilder(layout);
 		builder.setDefaultDialogBorder();
 		builder.setOpaque(true);
 		CellConstraints cc = new CellConstraints();
 
-		final LinkMouseListener pms3Link = new LinkMouseListener("PS3 Media Server " + PMS.getVersion(),
+		String projectName = PropertiesUtil.getProjectProperties().get("project.name");
+
+		final LinkMouseListener pms3Link = new LinkMouseListener(projectName + " " + PMS.getVersion(),
 			"http://www.ps3mediaserver.org/");
 		JLabel lPms3Link = builder.addLabel(pms3Link.getLabel(), cc.xy(2, 1, "center, fill"));
 		lPms3Link.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -114,8 +116,8 @@ public class AboutTab {
 	}
 
 	private static class LinkMouseListener implements MouseListener {
-		private String name;
-		private String link;
+		private final String name;
+		private final String link;
 
 		public LinkMouseListener(String n, String l) {
 			name = n;
@@ -137,7 +139,7 @@ public class AboutTab {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			try {
-				PMSUtil.browseURI(link);
+				PMS.get().getRegistry().browseURI(link);
 			} catch (Exception e1) {
 			}
 		}
