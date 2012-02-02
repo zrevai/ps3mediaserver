@@ -27,7 +27,7 @@
 	<target name="PMS" depends="depends, clean" description="description">
 		<mkdir dir="classes" />
 
-		<javac srcdir="." excludes="osx/**" destdir="classes" target="1.7" source="1.7" classpathref="lib.path.ref" debug="on" debuglevel="lines,vars,source" encoding="iso-8859-1" includeantruntime="false">
+		<javac srcdir="." excludes="osx/**" destdir="classes" target="1.6" source="1.6" classpathref="lib.path.ref" debug="on" debuglevel="lines,vars,source" encoding="iso-8859-1" includeantruntime="false">
 			<!-- <compilerarg value="-Xlint"/> -->
 		</javac>
 
