@@ -34,6 +34,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Locale;
 import java.util.Map.Entry;
+import java.util.Properties;
 import java.util.UUID;
 import java.util.logging.LogManager;
 
@@ -81,7 +82,6 @@ import net.pms.formats.WEB;
 import net.pms.gui.DummyFrame;
 import net.pms.gui.IFrame;
 import net.pms.io.BasicSystemUtils;
-import net.pms.io.MacSystemUtils;
 import net.pms.io.OutputParams;
 import net.pms.io.OutputTextConsumer;
 import net.pms.io.ProcessWrapperImpl;
@@ -95,10 +95,10 @@ import net.pms.newgui.GeneralTab;
 import net.pms.newgui.LooksFrame;
 import net.pms.newgui.ProfileChooser;
 import net.pms.update.AutoUpdater;
+import net.pms.util.PMSUtil;
+import net.pms.util.PmsProperties;
 import net.pms.util.ProcessUtil;
-import net.pms.util.PropertiesUtil;
 import net.pms.util.SystemErrWrapper;
-import net.pms.util.TaskRunner;
 
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.event.ConfigurationEvent;
@@ -133,6 +133,11 @@ public class PMS {
 
 	// TODO(tcox):  This shouldn't be static
 	private static PmsConfiguration configuration;
+
+	/**
+	 * General properties for the PMS project.
+	 */
+	private static PmsProperties projectProperties = new PmsProperties();
 	
 	/**Returns a pointer to the main PMS GUI.
 	 * @return {@link IFrame} Main PMS window.
@@ -346,8 +351,8 @@ public class PMS {
 	private boolean init() throws Exception {
 		AutoUpdater autoUpdater = null;
 
-		// Temporary fix for backwards compatibility
-		VERSION = getVersion();
+		// Read the project properties resource file.
+		initProjectProperties();
 
 		if (Build.isUpdatable()) {
 			String serverURL = Build.getUpdateServerURL();
@@ -594,11 +599,7 @@ public class PMS {
 		if (Platform.isWindows()) {
 			return new WinUtils();
 		} else {
-			if (Platform.isMac()) {
-				return new MacSystemUtils();
-			} else {
-				return new BasicSystemUtils();
-			}
+			return new BasicSystemUtils();
 		}
 	}
 
@@ -764,29 +765,21 @@ public class PMS {
 	 */
 	// XXX: don't try to optimize this by reusing the same server instance.
 	// see the comment above HTTPServer.stop()
-	public void reset() {
-		TaskRunner.getInstance().submitNamed("restart", true, new Runnable() {
-			public void run() {
-				try {
-					logger.trace("Waiting 1 second...");
-					UPNPHelper.sendByeBye();
-					server.stop();
-					server = null;
-					RendererConfiguration.resetAllRenderers();
-					try {
-						Thread.sleep(1000);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-					server = new HTTPServer(configuration.getServerPort());
-					server.start();
-					UPNPHelper.sendAlive();
-					frame.setReloadable(false);
-				} catch (IOException e) {
-					logger.error("error during restart :" +e.getMessage(), e);
-				}
-			}
-		});
+	public void reset() throws IOException {
+		logger.trace("Waiting 1 second...");
+		UPNPHelper.sendByeBye();
+		server.stop();
+		server = null;
+		RendererConfiguration.resetAllRenderers();
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		server = new HTTPServer(configuration.getServerPort());
+		server.start();
+		UPNPHelper.sendAlive();
+		frame.setReloadable(false);
 	}
 
 	// Cannot remove these methods because of backwards compatibility;
@@ -798,7 +791,6 @@ public class PMS {
 	 * debug stream has not been set up yet.
 	 * @param msg {@link String} to be added to the debug stream.
 	 */
-	@Deprecated
 	public static void debug(String msg) {
 		logger.trace(msg);
 	}
@@ -808,7 +800,6 @@ public class PMS {
 	 * Adds a message to the info stream.
 	 * @param msg {@link String} to be added to the info stream.
 	 */
-	@Deprecated
 	public static void info(String msg) {
 		logger.debug(msg);
 	}
@@ -819,7 +810,6 @@ public class PMS {
 	 * shown in the Trace tab.
 	 * @param msg {@link String} to be added to the minimal stream.
 	 */
-	@Deprecated
 	public static void minimal(String msg) {
 		logger.info(msg);
 	}
@@ -831,7 +821,6 @@ public class PMS {
 	 * @param msg {@link String} to be added to the error stream
 	 * @param t {@link Throwable} comes from an {@link Exception} 
 	 */
-	@Deprecated
 	public static void error(String msg, Throwable t) {
 		logger.error(msg, t);
 	}
@@ -861,7 +850,7 @@ public class PMS {
 					}
 
 					if (ni != null) {
-						byte[] addr = getRegistry().getHardwareAddress(ni); // return null when java.net.preferIPv4Stack=true
+						byte[] addr = PMSUtil.getHardwareAddress(ni); // return null when java.net.preferIPv4Stack=true
 						if (addr != null) {
 							uuid = UUID.nameUUIDFromBytes(addr).toString();
 							logger.info(String.format("Generated new UUID based on the MAC address of the network adapter '%s'", ni.getDisplayName()));
@@ -1068,11 +1057,35 @@ public class PMS {
 	}
 
 	/**
+	 * Returns the project properties object.
+	 *
+	 * @return The properties object.
+	 */
+	private static PmsProperties getProjectProperties() {
+		return projectProperties;
+	}
+
+	/**
 	 * Returns the project version for PMS.
 	 *
 	 * @return The project version.
 	 */
 	public static String getVersion() {
-		return PropertiesUtil.getProjectProperties().get("project.version");
+		return getProjectProperties().get("project.version");
+	}
+
+	/**
+	 * Reads the properties file with project specific settings.
+	 */
+	private void initProjectProperties() {
+		try {
+			// Read project properties resource file.
+			getProjectProperties().loadFromResourceFile("/resources/project.properties");
+
+			// Temporary fix for backwards compatibility
+			VERSION = getVersion();
+		} catch (IOException e) {
+			logger.error("Could not load project.properties");
+		}
 	}
 }

@@ -60,7 +60,6 @@ import net.pms.io.WindowsNamedPipe;
 import net.pms.newgui.update.AutoUpdateDialog;
 import net.pms.update.AutoUpdater;
 import net.pms.util.PMSUtil;
-import net.pms.util.PropertiesUtil;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -263,11 +262,7 @@ public class LooksFrame extends JFrame implements IFrame, Observer {
 			setContentPane(jp);
 		}
 
-		String projectName = PropertiesUtil.getProjectProperties().get("project.name");
-		String projectVersion = PropertiesUtil.getProjectProperties().get("project.version");
-		String title = projectName + " " + projectVersion + " - " + Messages.getString("LooksFrame.26");
-
-		this.setTitle(title);
+		this.setTitle("PS3 Media Server " + PMS.getVersion() + " - FOR TESTING ONLY, POSSIBLY UNSTABLE");
 		this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		Dimension screenSize = getToolkit().getScreenSize();
 
@@ -292,7 +287,7 @@ public class LooksFrame extends JFrame implements IFrame, Observer {
 		if (!configuration.isMinimized() && System.getProperty(START_SERVICE) == null) {
 			setVisible(true);
 		}
-		PMS.get().getRegistry().addSystemTray(this);
+		PMSUtil.addSystemTray(this);
 	}
 
 	protected static ImageIcon readImageIcon(String filename) {
@@ -318,7 +313,11 @@ public class LooksFrame extends JFrame implements IFrame, Observer {
 		reload = createToolBarButton(Messages.getString("LooksFrame.12"), "reload_page-48.png", Messages.getString("LooksFrame.12"));
 		reload.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PMS.get().reset();
+				try {
+					PMS.get().reset();
+				} catch (IOException e1) {
+					logger.error(null, e1);
+				}
 			}
 		});
 		toolBar.add(reload);
