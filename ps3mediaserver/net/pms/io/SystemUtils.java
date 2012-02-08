@@ -1,50 +1,27 @@
 package net.pms.io;
 
 import java.io.File;
-import java.net.NetworkInterface;
-import java.net.SocketException;
-
-import net.pms.newgui.LooksFrame;
 
 public interface SystemUtils {
-	public abstract void disableGoToSleep();
 
-	public abstract void reenableGoToSleep();
+    public abstract void disableGoToSleep();
 
-	public abstract File getAvsPluginsDir();
+    public abstract void reenableGoToSleep();
 
-	public abstract String getShortPathNameW(String longPathName);
+    public abstract File getAvsPluginsDir();
 
-	public abstract String getWindowsDirectory();
+    public abstract String getShortPathNameW(String longPathName);
 
-	public abstract String getDiskLabel(File f);
+    public abstract String getWindowsDirectory();
 
-	public abstract boolean isKerioFirewall();
+    public abstract String getDiskLabel(File f);
 
-	public abstract String getVlcp();
+    public abstract boolean isKerioFirewall();
 
-	public abstract String getVlcv();
+    public abstract String getVlcp();
 
-	public abstract boolean isAvis();
+    public abstract String getVlcv();
 
-	/**
-	 * Open HTTP URLs in the default browser.
-	 * @param uri URI string to open externally.
-	 */
-	public void browseURI(String uri);
+    public abstract boolean isAvis();
 
-	public boolean isNetworkInterfaceLoopback(NetworkInterface ni) throws SocketException;
-
-	public void addSystemTray(final LooksFrame frame);
-
-	/**
-	 * Fetch the hardware address for a network interface.
-	 * 
-	 * @param ni Interface to fetch the mac address for
-	 * @return the mac address as bytes, or null if it couldn't be fetched.
-	 * @throws SocketException
-	 *             This won't happen on Mac OS, since the NetworkInterface is
-	 *             only used to get a name.
-	 */
-	public byte[] getHardwareAddress(NetworkInterface ni) throws SocketException;
 }

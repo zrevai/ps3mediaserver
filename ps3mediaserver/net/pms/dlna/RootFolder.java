@@ -60,7 +60,7 @@ import com.sun.jna.Platform;
 
 public class RootFolder extends DLNAResource {
 	private static final Logger logger = LoggerFactory.getLogger(RootFolder.class);
-	private final PmsConfiguration configuration = PMS.getConfiguration();
+	private PmsConfiguration configuration = PMS.getConfiguration();
 	private boolean running;
 
 	public RootFolder() {
@@ -751,7 +751,10 @@ public class RootFolder extends DLNAResource {
 			res.addChild(new VirtualVideoAction(Messages.getString("PMS.27"), true) {
 				@Override
 				public boolean enable() {
-					PMS.get().reset();
+					try {
+						configuration.save();
+					} catch (ConfigurationException e) {
+					}
 					return true;
 				}
 			});
