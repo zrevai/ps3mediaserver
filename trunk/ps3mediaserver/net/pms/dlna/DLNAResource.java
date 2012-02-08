@@ -540,7 +540,7 @@ public abstract class DLNAResource extends HTTPResource implements Cloneable, Ru
 							for (DLNAMediaSubtitle s : child.getMedia().getSubtitlesCodes()) {
 								hasEmbeddedSubs = (hasEmbeddedSubs || s.isEmbedded());
 							}
-						}
+						} 
 
 						boolean hasSubsToTranscode = false;
 
@@ -1217,7 +1217,7 @@ public abstract class DLNAResource extends HTTPResource implements Cloneable, Ru
 					if (getMedia() != null && getMedia().isMediaparsed()) {
 						addAttribute(sb, "bitrate", getMedia().getBitrate());
 						if (getMedia().getDuration() != null) {
-							addAttribute(sb, "duration", DLNAMediaInfo.getDurationString(getMedia().getDuration()));
+							addAttribute(sb, "duration", getMedia().getDuration());
 						}
 						if (firstAudioTrack != null && firstAudioTrack.getSampleFrequency() != null) {
 							addAttribute(sb, "sampleFrequency", firstAudioTrack.getSampleFrequency());

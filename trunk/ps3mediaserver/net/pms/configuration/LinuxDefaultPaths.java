@@ -1,7 +1,5 @@
 package net.pms.configuration;
 
-import net.pms.util.PropertiesUtil;
-
 class LinuxDefaultPaths implements ProgramPaths {
 	@Override
 	public String getEac3toPath() {
@@ -30,7 +28,7 @@ class LinuxDefaultPaths implements ProgramPaths {
 
 	@Override
 	public String getTsmuxerPath() {
-		return getBinariesPath() + "linux/tsMuxeR";
+		return "linux/tsMuxeR";
 	}
 
 	@Override
@@ -46,26 +44,5 @@ class LinuxDefaultPaths implements ProgramPaths {
 	@Override
 	public String getIMConvertPath() {
 		return "convert";
-	}
-
-	/**
-	 * Returns the path where binaries can be found. This path differs between
-	 * the build phase and the test phase. The path will end with a slash unless
-	 * it is empty.
-	 *
-	 * @return The path for binaries.
-	 */
-	private String getBinariesPath() {
-		String path = PropertiesUtil.getProjectProperties().get("project.binaries");
-
-		if (path != null && !"".equals(path)) {
-			if (path.endsWith("/")) {
-				return path;
-			} else {
-				return path + "/";
-			}
-		} else {
-			return "";
-		}
 	}
 }

@@ -1,6 +1,7 @@
 package net.pms.configuration;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,7 +17,7 @@ import net.pms.dlna.RootFolder;
 import net.pms.formats.Format;
 import net.pms.network.HTTPResource;
 import net.pms.network.SpeedStats;
-import net.pms.util.PropertiesUtil;
+import net.pms.util.PmsProperties;
 
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.ConversionException;
@@ -35,6 +36,7 @@ public class RendererConfiguration {
 	private static ArrayList<RendererConfiguration> renderersConfs;
 	private static RendererConfiguration defaultConf;
 	private static Map<InetAddress, RendererConfiguration> addressAssociation = new HashMap<InetAddress, RendererConfiguration>();
+	private static PmsProperties projectProperties = new PmsProperties();
 
 	public static RendererConfiguration getDefaultConf() {
 		return defaultConf;
@@ -47,9 +49,17 @@ public class RendererConfiguration {
 		} catch (ConfigurationException e) {
 		}
 
-		File renderersDir = getRenderersDir();
+		try {
+			// Read project properties resource file.
+			projectProperties.loadFromResourceFile("/resources/project.properties");
+		} catch (IOException e) {
+			logger.error("Error loading renderer configurations: could not load project.properties");
+			return;
+		}
 
-		if (renderersDir != null) {
+		File renderersDir = new File(projectProperties.get("project.renderers.dir"));
+
+		if (renderersDir.exists() && renderersDir.isDirectory()) {
 			logger.info("Loading renderer configurations from " + renderersDir.getAbsolutePath());
 
 			File[] confs = renderersDir.listFiles();
@@ -70,23 +80,10 @@ public class RendererConfiguration {
 		}
 	}
 
-	protected static File getRenderersDir() {
-		final String[] pathList = PropertiesUtil.getProjectProperties().get("project.renderers.dir").split(",");
-		for (String path : pathList) {
-			if (path.trim().length()>0) {
-				File f = new File(path.trim());
-				if (f.exists() && f.isDirectory() && f.canRead()) {
-					return f;
-				}
-			}
-		}
-		return null;
-	}
-
 	private RootFolder rootFolder;
 
 	public static void resetAllRenderers() {
-		for(RendererConfiguration rc : renderersConfs) {
+		for (RendererConfiguration rc : renderersConfs) {
 			rc.rootFolder = null;
 		}
 	}
@@ -101,8 +98,9 @@ public class RendererConfiguration {
 
 	/**
 	 * Associate an IP address with this renderer. The association will
-	 * persist between requests, allowing the renderer to be recognized
-	 * by its address in later requests.
+	 * persist between requests, allowing the renderer to be recognized by
+	 * its address in later requests.
+	 *
 	 * @param sa The IP address to associate.
 	 * @see #getRendererConfigurationBySocketAddress(InetAddress)
 	 */
@@ -119,11 +117,12 @@ public class RendererConfiguration {
 	 * Tries to find a matching renderer configuration based on a request
 	 * header line with a User-Agent header. These matches are made using
 	 * the "UserAgentSearch" configuration option in a renderer.conf.
-	 * Returns the matched configuration or <code>null</code> if no match
-	 * could be found.
+	 * Returns the matched configuration or
+	 * <code>null</code> if no match could be found.
 	 *
 	 * @param userAgentString The request header line.
-	 * @return The matching renderer configuration or <code>null</code>.
+	 * @return The matching renderer configuration or
+	 * <code>null</code>.
 	 */
 	public static RendererConfiguration getRendererConfigurationByUA(String userAgentString) {
 		for (RendererConfiguration r : renderersConfs) {
@@ -152,11 +151,12 @@ public class RendererConfiguration {
 	 * header line with an additional, non-User-Agent header. These matches
 	 * are made based on the "UserAgentAdditionalHeader" and
 	 * "UserAgentAdditionalHeaderSearch" configuration options in a
-	 * renderer.conf. Returns the matched configuration or <code>null</code>
-	 * if no match could be found.
+	 * renderer.conf. Returns the matched configuration or
+	 * <code>null</code> if no match could be found.
 	 *
 	 * @param header The request header line.
-	 * @return The matching renderer configuration or <code>null</code>.
+	 * @return The matching renderer configuration or
+	 * <code>null</code>.
 	 */
 	public static RendererConfiguration getRendererConfigurationByUAAHH(String header) {
 		for (RendererConfiguration r : renderersConfs) {
@@ -169,7 +169,6 @@ public class RendererConfiguration {
 		}
 		return null;
 	}
-
 	/**
 	 * Tries to find a matching renderer configuration based on the name of
 	 * the renderer. Returns true if the provided name is equal to or a
@@ -191,6 +190,7 @@ public class RendererConfiguration {
 		return null;
 	}
 
+	private final File configurationFile;
 	private final PropertiesConfiguration configuration;
 	private FormatConfiguration formatConfiguration;
 
@@ -235,14 +235,12 @@ public class RendererConfiguration {
 	private static final String AUDIO = "Audio";
 	private static final String IMAGE = "Image";
 	private static final String SEEK_BY_TIME = "SeekByTime";
-
 	private static final String MPEGPSAC3 = "MPEGAC3";
 	private static final String MPEGTSAC3 = "MPEGTSAC3";
 	private static final String WMV = "WMV";
 	private static final String LPCM = "LPCM";
 	private static final String WAV = "WAV";
 	private static final String MP3 = "MP3";
-
 	private static final String TRANSCODE_AUDIO = "TranscodeAudio";
 	private static final String TRANSCODE_VIDEO = "TranscodeVideo";
 	private static final String DEFAULT_VBV_BUFSIZE = "DefaultVBVBufSize";
@@ -307,6 +305,7 @@ public class RendererConfiguration {
 		configuration = new PropertiesConfiguration();
 		configuration.setListDelimiter((char) 0);
 
+		configurationFile = f;
 		if (f != null) {
 			configuration.load(f);
 		}
