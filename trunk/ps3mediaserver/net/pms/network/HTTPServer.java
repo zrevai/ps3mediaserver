@@ -35,7 +35,6 @@ import java.util.List;
 import java.util.concurrent.Executors;
 
 import net.pms.PMS;
-import net.pms.util.PMSUtil;
 
 import org.apache.commons.lang.StringUtils;
 import org.jboss.netty.bootstrap.ServerBootstrap;
@@ -49,8 +48,8 @@ import org.slf4j.LoggerFactory;
 
 public class HTTPServer implements Runnable {
 	private static final Logger logger = LoggerFactory.getLogger(HTTPServer.class);
-	private ArrayList<String> ips;
-	private int port;
+	private final ArrayList<String> ips;
+	private final int port;
 	private String hostName;
 	private ServerSocketChannel serverSocketChannel;
 	private ServerSocket serverSocket;
@@ -163,7 +162,7 @@ public class HTTPServer implements Runnable {
 		String displayName = net.getDisplayName();
 
 		// Should we skip this particular network interface?
-		if (PMSUtil.isNetworkInterfaceLoopback(net)) {
+		if (PMS.get().getRegistry().isNetworkInterfaceLoopback(net)) {
 			skip = true;
 		} else {
 			skip = skipNetworkInterface(name, displayName);
