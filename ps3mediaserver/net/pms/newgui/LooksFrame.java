@@ -60,6 +60,7 @@ import net.pms.io.WindowsNamedPipe;
 import net.pms.newgui.update.AutoUpdateDialog;
 import net.pms.update.AutoUpdater;
 import net.pms.util.PMSUtil;
+import net.pms.util.PropertiesUtil;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -262,7 +263,11 @@ public class LooksFrame extends JFrame implements IFrame, Observer {
 			setContentPane(jp);
 		}
 
-		this.setTitle("PS3 Media Server " + PMS.getVersion() + " - FOR TESTING ONLY, POSSIBLY UNSTABLE");
+		String projectName = PropertiesUtil.getProjectProperties().get("project.name");
+		String projectVersion = PropertiesUtil.getProjectProperties().get("project.version");
+		String title = projectName + " " + projectVersion + " - " + Messages.getString("LooksFrame.26");
+
+		this.setTitle(title);
 		this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		Dimension screenSize = getToolkit().getScreenSize();
 
