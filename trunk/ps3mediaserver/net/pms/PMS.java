@@ -168,11 +168,13 @@ public class PMS {
 	/**
 	 * @deprecated This field is not used and will be removed in the future. 
 	 */
+	@Deprecated
 	public final static SimpleDateFormat sdfDate = new SimpleDateFormat("HH:mm:ss.SSS", Locale.US);
 
 	/**
 	 * @deprecated This field is not used and will be removed in the future. 
 	 */
+	@Deprecated
 	public final static SimpleDateFormat sdfHour = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.US);
 
 	/**
@@ -791,6 +793,7 @@ public class PMS {
 	 * debug stream has not been set up yet.
 	 * @param msg {@link String} to be added to the debug stream.
 	 */
+	@Deprecated
 	public static void debug(String msg) {
 		logger.trace(msg);
 	}
@@ -800,6 +803,7 @@ public class PMS {
 	 * Adds a message to the info stream.
 	 * @param msg {@link String} to be added to the info stream.
 	 */
+	@Deprecated
 	public static void info(String msg) {
 		logger.debug(msg);
 	}
@@ -810,6 +814,7 @@ public class PMS {
 	 * shown in the Trace tab.
 	 * @param msg {@link String} to be added to the minimal stream.
 	 */
+	@Deprecated
 	public static void minimal(String msg) {
 		logger.info(msg);
 	}
@@ -821,6 +826,7 @@ public class PMS {
 	 * @param msg {@link String} to be added to the error stream
 	 * @param t {@link Throwable} comes from an {@link Exception} 
 	 */
+	@Deprecated
 	public static void error(String msg, Throwable t) {
 		logger.error(msg, t);
 	}
