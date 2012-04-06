@@ -3,10 +3,10 @@ Name:                Version/Build:   Link:
 dcraw                9.07             http://www.cybercom.net/~dcoffin/dcraw/
 FFmpeg               0.9.1            http://www.ffmpeg.org/
 flac                 1.2.1            http://flac.sourceforge.net/
-MPlayer & MEncoder   34814-SB28       http://www.spirton.com/mplayer-mencoder-subjunk-build/
+MPlayer & MEncoder   34836-SB29       http://www.spirton.com/mplayer-mencoder-subjunk-build/
 tsMuxeR              1.10.6           http://www.smlabs.net/en/products/tsmuxer/
 libmediainfo.dylib   0.7.54           http://mediainfo.sourceforge.net/
 
 For the exact build details or to build custom versions, see:
 
-   https://github.com/ps3mediaserver/ps3mediaserver/blob/master/contrib/build-pms-binaries.sh
+   https://github.com/ps3mediaserver/ps3mediaserver/blob/master/contrib/
