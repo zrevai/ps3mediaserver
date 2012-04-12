@@ -1,6 +1,6 @@
 #------------------------------------------------------------------------------#
 #                                                                              #
-#                       InterFrame 2.0 Beta 3 by SubJunk                       #
+#                       InterFrame 2.0 Beta 4 by SubJunk                       #
 #                                                                              #
 #         A frame interpolation script that makes accurate estimations         #
 #                   about the content of non-existent frames                   #
@@ -82,9 +82,9 @@ function InterFrameProcess(clip Input, string "Preset", string "Tuning", string 
 	""")
 
 	OverrideAlgo != "0" ? Eval("""
-		SmoothString = SmoothString + "algo:"+OverrideAlgo+",mask:{"
+		SmoothString = SmoothString + "algo:"+OverrideAlgo+",mask:{cover:80,"
 	""") : Eval("""
-		SmoothString = (Tuning == "Smooth") ? SmoothString + "algo:23,mask:{" : SmoothString + "algo:13,mask:{"
+		SmoothString = (Tuning == "Smooth") ? SmoothString + "algo:23,mask:{" : SmoothString + "algo:13,mask:{cover:80,"
 	""")
 
 	OverrideArea != "0" ? Eval("""
@@ -93,7 +93,7 @@ function InterFrameProcess(clip Input, string "Preset", string "Tuning", string 
 		SmoothString = (Tuning == "Smooth" || Tuning == "Animation") ? SmoothString + "area:150" : SmoothString + "area:0"
 	""")
 
-	SmoothString = SmoothString + ",cover:80},mask:{area_sharp:2},scene:{blend:true, mode:0}}"
+	SmoothString = SmoothString + ",area_sharp:1.2},scene:{blend:true, mode:0}}"
 
 	# Make interpolation vector clip
 	Super   = SVSuper(Input, SuperString)
