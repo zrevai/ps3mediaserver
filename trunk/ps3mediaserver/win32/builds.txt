@@ -2,6 +2,6 @@ Name:                 Version/Build:   Link:
 
 FFmpeg                35509            http://oss.netfarm.it/mplayer-win32.php
 FLAC                  1.2.1            http://flac.sourceforge.net/
-MPlayer & MEncoder    SB31             http://www.spirton.com/mplayer-mencoder-subjunk-build/
+MPlayer & MEncoder    SB32             http://www.spirton.com/mplayer-mencoder-subjunk-build/
 tsMuxeR               1.10.6           http://www.smlabs.net/tsmuxer_en.html
 ImageMagick Convert   6.7.6-4          http://www.imagemagick.org
