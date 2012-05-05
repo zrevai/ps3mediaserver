@@ -1,6 +1,6 @@
 #------------------------------------------------------------------------------#
 #                                                                              #
-#                          InterFrame 2.0 by SubJunk                           #
+#                         InterFrame 2.0.1 by SubJunk                          #
 #                                                                              #
 #         A frame interpolation script that makes accurate estimations         #
 #                   about the content of non-existent frames                   #
