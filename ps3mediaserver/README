@@ -2,36 +2,10 @@ PS3 Media Server
 ================
 by shagrath
 
-Links
-=====
+The latest source code for PS3 Media Server is hosted on GitHub:
 
-Website:       http://www.ps3mediaserver.org
-Issue tracker: https://code.google.com/p/ps3mediaserver/issues/list
+    https://github.com/ps3mediaserver/ps3mediaserver
 
-Thanks
-======
+This SVN repository only contains platform specific binaries required to build PMS.
 
-Thanks to:
 
-    - Redlum
-    - tcox
-    - SubJunk
-    - taconaut
-    - tomeko
-    - chocolateboy
-    - ditlew
-    - Raptor399
-    - renszarv
-
-- for major code contributions.
-
-Thanks to:
-
-    - meskibob
-    - otmanix
-
-- for documentation and contributions to the community.
-
-- boblinds and snoots for the network test cases :)
-- sarraken, bleuecinephile, bd.azerty, fabounnet for the support and feedback
-- See changelog for more thanks
