@@ -1,0 +1,12 @@
+Name:                Version/Build:   Link:
+
+dcraw                9.07             http://www.cybercom.net/~dcoffin/dcraw/
+FFmpeg               0.9.1 (57d5a224) http://www.ffmpeg.org/
+flac                 1.2.1            http://flac.sourceforge.net/
+MPlayer & MEncoder   35225            http://www.mplayerhq.hu/
+tsMuxeR              1.10.6           http://www.smlabs.net/en/products/tsmuxer/
+libmediainfo.dylib   0.7.58           http://mediainfo.sourceforge.net/
+
+For the exact build details or to build custom versions, see:
+
+   https://github.com/ps3mediaserver/ps3mediaserver/blob/master/contrib/
