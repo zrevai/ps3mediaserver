@@ -3,6 +3,6 @@ Name:                 Version/Build:             Link:
 FFmpeg                git-1a104bf (2012-10-10)   http://ffmpeg.zeranoe.com/builds/
 FLAC                  1.2.1                      http://flac.sourceforge.net/
 ImageMagick Convert   6.7.6-4                    http://www.imagemagick.org
-MediaInfo             0.7.60                     http://mediainfo.sourceforge.net/
+MediaInfo             0.7.62                     http://mediainfo.sourceforge.net/
 MPlayer & MEncoder    SB41                       http://www.spirton.com/mplayer-mencoder-subjunk-build/
 tsMuxeR               1.10.6                     http://www.smlabs.net/tsmuxer_en.html
