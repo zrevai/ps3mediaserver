@@ -5,7 +5,7 @@ FFmpeg               1.1.2            http://www.ffmpeg.org/
 flac                 1.2.1            http://flac.sourceforge.net/
 MPlayer & MEncoder   35225            http://www.mplayerhq.hu/
 tsMuxeR              1.10.6           http://www.smlabs.net/en/products/tsmuxer/
-libmediainfo.dylib   0.7.62           http://mediainfo.sourceforge.net/
+libmediainfo.dylib   0.7.61           http://mediainfo.sourceforge.net/
 
 For the exact build details or to build custom versions, see:
 
