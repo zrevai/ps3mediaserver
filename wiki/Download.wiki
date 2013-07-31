@@ -19,3 +19,7 @@ There is an installer available for Mac OS X:
 There is one archive with binaries available for Linux:
 
   * [http://sourceforge.net/projects/ps3mediaserver/files/pms-1.90.0-generic-linux-unix.tar.gz/download pms-1.90.0-generic-linux-unix.tar.gz (Linux archive)]
+
+=Older releases=
+
+Releases before PMS 1.90.0 can still be downloaded from [https://code.google.com/p/ps3mediaserver/downloads/list?can=1 here].
