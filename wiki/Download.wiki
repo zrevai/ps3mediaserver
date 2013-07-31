@@ -7,3 +7,6 @@ The latest project releases can now be downloaded from [https://sourceforge.net/
   * [http://sourceforge.net/projects/ps3mediaserver/files/pms-1.90.0-setup-without-jre.exe/download PS3 Media Server 1.90.0 Windows 32 bits, no Java included]
   * [http://sourceforge.net/projects/ps3mediaserver/files/pms-1.90.0-generic-linux-unix.tar.gz/download PS3 Media Server 1.90.0 Mac OS X]
   * [http://sourceforge.net/projects/ps3mediaserver/files/pms-1.90.0-generic-linux-unix.tar.gz/download PS3 Media Server 1.90.0 Linux Archive]
+
+
+Current release: PS3 Media Server 1.90.0   2013/07/13
