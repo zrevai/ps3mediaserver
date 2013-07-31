@@ -12,10 +12,10 @@ There are three installers available for the Windows platform:
 
 There is an installer available for Mac OS X:
 
-  * [http://sourceforge.net/projects/ps3mediaserver/files/pms-1.90.0-setup-macosx.tar.gz/download PS3 Media Server 1.90.0 Mac OS X]
+  * [http://sourceforge.net/projects/ps3mediaserver/files/pms-1.90.0-setup-macosx.tar.gz/download pms-1.90.0-setup-macosx.tar.gz (Mac OS X 10.6+ installer, Java included)]
 
 =Linux=
 
 There is one archive with binaries available for Linux:
 
-  * [http://sourceforge.net/projects/ps3mediaserver/files/pms-1.90.0-generic-linux-unix.tar.gz/download PS3 Media Server 1.90.0 Linux]
+  * [http://sourceforge.net/projects/ps3mediaserver/files/pms-1.90.0-generic-linux-unix.tar.gz/download pms-1.90.0-generic-linux-unix.tar.gz (Linux archive)]
