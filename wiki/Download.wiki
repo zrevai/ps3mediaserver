@@ -1,5 +1,3 @@
-=Downloads=
-
 The latest project releases can now be downloaded from [https://sourceforge.net/projects/ps3mediaserver/files/ SourceForge] :
 
   * [http://sourceforge.net/projects/ps3mediaserver/files/pms-1.90.0-setup-full-x64.exe/download PS3 Media Server 1.90.0 Windows 64 bits, Full Installer, Java included]
